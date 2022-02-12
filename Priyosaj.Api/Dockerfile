@@ -5,18 +5,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Wateron.Api/Wateron.Api.csproj", "Wateron.Api/"]
-COPY ["Wateron.Business/Wateron.Business.csproj", "Wateron.Business/"]
-COPY ["Wateron.Contacts/Wateron.Contacts.csproj", "Wateron.Contacts/"]
-RUN dotnet restore "Wateron.Api/Wateron.Api.csproj"
+COPY ["Priyosaj.Api/Priyosaj.Api.csproj", "Priyosaj.Api/"]
+COPY ["Priyosaj.Business/Priyosaj.Business.csproj", "Priyosaj.Business/"]
+COPY ["Priyosaj.Contacts/Priyosaj.Contacts.csproj", "Priyosaj.Contacts/"]
+RUN dotnet restore "Priyosaj.Api/Priyosaj.Api.csproj"
 COPY . .
-WORKDIR "/src/Wateron.Api"
-RUN dotnet build "Wateron.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/Priyosaj.Api"
+RUN dotnet build "Priyosaj.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Wateron.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Priyosaj.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Wateron.Api.dll"]
+ENTRYPOINT ["dotnet", "Priyosaj.Api.dll"]

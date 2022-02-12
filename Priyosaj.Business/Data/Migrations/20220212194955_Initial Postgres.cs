@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Priyosaj.Api.Data.Migrations
+namespace Priyosaj.Business.Data.Migrations
 {
-    public partial class PostgresInitial : Migration
+    public partial class InitialPostgres : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

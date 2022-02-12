@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Models;
 
-namespace Priyosaj.Api.Data;
+namespace Priyosaj.Business.Data;
 
 public class StoreContext : DbContext
 {

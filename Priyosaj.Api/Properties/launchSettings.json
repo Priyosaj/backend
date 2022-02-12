@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Wateron.Api": {
+    "Priyosaj.Api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

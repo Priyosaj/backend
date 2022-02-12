@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Priyosaj.Contacts\Priyosaj.Contacts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
+  </ItemGroup>
+
 </Project>

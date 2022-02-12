@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Api.Data;
+using Priyosaj.Business.Data;
 
 namespace Priyosaj.Api.Extensions;
 

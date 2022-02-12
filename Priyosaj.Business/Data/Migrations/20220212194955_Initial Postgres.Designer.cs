@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Priyosaj.Api.Data;
+using Priyosaj.Business.Data;
 
 #nullable disable
 
-namespace Priyosaj.Api.Data.Migrations
+namespace Priyosaj.Business.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220212181225_Postgres Initial")]
-    partial class PostgresInitial
+    [Migration("20220212194955_Initial Postgres")]
+    partial class InitialPostgres
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

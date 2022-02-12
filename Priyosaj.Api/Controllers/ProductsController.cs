@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Api.Data;
+using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Models;
 
 namespace Priyosaj.Api.Controllers;

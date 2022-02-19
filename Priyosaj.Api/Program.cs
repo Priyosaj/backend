@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Extensions;
+using Priyosaj.Business.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,4 +38,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<StoreContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger>();
+    logger.LogError(ex, "An Error Occured During Migration!");
+    throw;
+}
+
+await app.RunAsync();

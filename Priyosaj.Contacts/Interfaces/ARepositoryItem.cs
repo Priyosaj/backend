@@ -2,9 +2,14 @@
 
 public abstract class ARepositoryItem : IRepositoryItem
 {
-    public abstract Guid GetId();
-    public DateTime CreatedAt { get; set; }
-    public DateTime ModifiedAt { get; set; }
+    public virtual Guid GetId()
+    {
+        return Id;
+    }
+
+    public Guid Id;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime ModifiedAt { get; set; } = DateTime.Now;
 }
 
 /*

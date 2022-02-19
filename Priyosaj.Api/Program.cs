@@ -20,6 +20,7 @@ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", policy =>
         .WithOrigins("http://localhost:4200");
 }));
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 
@@ -48,7 +49,7 @@ try
 }
 catch (Exception ex)
 {
-    var logger = services.GetRequiredService<ILogger>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An Error Occured During Migration!");
     throw;
 }

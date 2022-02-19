@@ -42,6 +42,7 @@ public class ProductsController : ControllerBase
         _logger.LogInformation("Creating Product: ");
 
         await _context.Products.AddAsync(product);
+        await _context.SaveChangesAsync();
         return Ok(product);
     }
 }

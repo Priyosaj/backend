@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Business.Data;
+using Priyosaj.Contacts.Interfaces;
 
 namespace Priyosaj.Api.Extensions;
 
@@ -7,6 +8,7 @@ public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
         // services.AddScoped<ITokenService, TokenService>();

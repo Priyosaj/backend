@@ -2,10 +2,12 @@
 
 namespace Priyosaj.Contacts.Models;
 
-public class Product : ARepositoryItem
+public class Product : BaseRepositoryItem
 {
     public Guid Id { get; set; }
-    public string Title { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public string Category { get; set; } = null!;
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+
+    public ICollection<ProductCategory> ProductCategories { get; set; } = null!;
+    // public Guid ProductCategoryId { get; set; }
 }

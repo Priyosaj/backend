@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Priyosaj.Business.Data;
@@ -11,9 +12,10 @@ using Priyosaj.Business.Data;
 namespace Priyosaj.Business.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220219124036_ProductCategoryUpdate2")]
+    partial class ProductCategoryUpdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,30 +61,43 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Models.ProductCategory", b =>
+            modelBuilder.Entity("ProductProductCategory", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Models.Product", null)
-                        .WithMany("ProductCategories")
-                        .HasForeignKey("ProductId");
+                    b.Property<Guid>("ProductCategoriesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ProductCategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductProductCategory");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Models.Product", b =>
+            modelBuilder.Entity("ProductProductCategory", b =>
                 {
-                    b.Navigation("ProductCategories");
+                    b.HasOne("Priyosaj.Contacts.Models.ProductCategory", null)
+                        .WithMany()
+                        .HasForeignKey("ProductCategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Priyosaj.Contacts.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

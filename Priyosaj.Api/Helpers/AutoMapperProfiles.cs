@@ -9,6 +9,7 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<Product, ProductResponseDto>();
+        CreateMap<ProductCreateDto, Product>();
 
     }
 }

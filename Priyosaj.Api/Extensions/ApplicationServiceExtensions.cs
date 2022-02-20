@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Interfaces;
 
@@ -9,11 +10,11 @@ public static class ApplicationServiceExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
         // services.AddScoped<ITokenService, TokenService>();
         // services.AddScoped<IUserRepository, UserRepository>();
-        // services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         // services.AddDbContextPool<StoreContext>(options =>
         // {
         //     options.UseSqlite(config.GetConnectionString("DBConnectionString"));

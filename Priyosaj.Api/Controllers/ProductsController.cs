@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.DTOs;
 using Priyosaj.Api.Errors;
+using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Interfaces;
 using Priyosaj.Contacts.Models;
@@ -26,14 +27,20 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Product>>> GetProductsAsync()
+    public async Task<ActionResult<PaginatedResponse<ProductResponseDto>>> GetProductsAsync(
+        [FromQuery] ProductSpecParams productParams)
     {
-        _logger.LogInformation("Returning Products");
-        var spec = new ProductDemoSpecification();
+        var spec = new ProductDemoSpecification(productParams);
+        var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+
+        var totalItems = await _productRepo.CountAsync(countSpec);
 
         var products = await _productRepo.ListAllAsyncWithSpec(spec);
 
-        return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductResponseDto>>(products));
+        var data = _mapper.Map<IReadOnlyList<ProductResponseDto>>(products);
+
+        return Ok(new PaginatedResponse<ProductResponseDto>(productParams.PageIndex,
+            productParams.PageSize, totalItems, data));
     }
 
     [HttpGet("{id}")]
@@ -42,10 +49,10 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<Product>> GetProductAsync(Guid id)
     {
         _logger.LogInformation("Returning Product: " + id);
-        var spec = new ProductDemoSpecification(id);
+        var spec = new ProductByIdSpecification(id);
 
         var product = await _productRepo.GetEntityWithSpec(spec);
-        
+
         if (product == null) return NotFound(new ApiResponse(404));
 
         return Ok(_mapper.Map<Product, ProductResponseDto>(product));
@@ -58,7 +65,7 @@ public class ProductsController : BaseApiController
 
         await _context.Products.AddAsync(_mapper.Map<ProductCreateDto, Product>(product));
         await _context.SaveChangesAsync();
-        
+
         return NoContent();
     }
 }

@@ -4,6 +4,7 @@ using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Interfaces;
+using StackExchange.Redis;
 
 namespace Priyosaj.Api.Extensions;
 
@@ -11,6 +12,12 @@ public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddSingleton<IConnectionMultiplexer>(c =>
+        {
+            var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
+            return ConnectionMultiplexer.Connect(configuration);
+        });
+        services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));

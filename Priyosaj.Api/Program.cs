@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Extensions;
 using Priyosaj.Api.Middlewares;
 using Priyosaj.Business.Data;
+using Priyosaj.Business.Identity;
+using Priyosaj.Contacts.Models.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,7 @@ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", policy =>
         .WithOrigins("http://localhost:4200");
 }));
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddApplicationIdentityServices(builder.Configuration);
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -40,6 +44,8 @@ app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
@@ -51,6 +57,11 @@ try
     var context = services.GetRequiredService<StoreContext>();
     await context.Database.MigrateAsync();
     await Seed.SeedUsers(context);
+
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+    await identityContext.Database.MigrateAsync();
+    await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
 }
 catch (Exception ex)
 {

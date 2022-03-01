@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
+using Priyosaj.Business.Services;
 using Priyosaj.Contacts.Interfaces;
 using StackExchange.Redis;
 
@@ -20,18 +21,27 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        services.AddScoped<ITokenService, TokenService>();
+        
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
-        // services.AddScoped<ITokenService, TokenService>();
         // services.AddScoped<IUserRepository, UserRepository>();
         // services.AddDbContextPool<StoreContext>(options =>
         // {
         //     options.UseSqlite(config.GetConnectionString("DBConnectionString"));
         // });
+        
         services.AddDbContextPool<StoreContext>(options =>
         {
             options.UseNpgsql(config.GetConnectionString("PostgresConnection"));
         });
+        
+        // services.AddDbContextPool<AppIdentityDbContext>(options =>
+        // {
+        //     options.UseNpgsql(config.GetConnectionString("PostgresIdentityConnection"));
+        // });
+        //
+        
         services.Configure<ApiBehaviorOptions>(options => 
         {
             options.InvalidModelStateResponseFactory = actionContext => 

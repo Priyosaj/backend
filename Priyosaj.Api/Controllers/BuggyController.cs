@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.Errors;
 using Priyosaj.Business.Data;
@@ -22,6 +23,13 @@ public class BuggyController : BaseApiController
         if (thing == null) return NotFound(new ApiResponse(404));
 
         return Ok();
+    }
+    
+    [HttpGet("test-auth")]
+    [Authorize]
+    public ActionResult GetSecretStuff()
+    {
+        return Ok("Super Secret Stuff");
     }
 
     [HttpGet("servererror")]

@@ -4,7 +4,7 @@ using Priyosaj.Contacts.Models.Identity;
 
 namespace Priyosaj.Business.Data;
 
-public class AppIdentityDbContext : IdentityDbContext<AppUser>
+public class AppIdentityDbContext : IdentityDbContext<AppUser, AppRole, string>
 {
     public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
     {

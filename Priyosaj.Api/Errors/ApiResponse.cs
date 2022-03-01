@@ -16,6 +16,7 @@ public class ApiResponse
         return statusCode switch
         {
             400 => "A bad request, you have made",
+            403 => "Uh oh, Gandalf is blocking the way!",
             401 => "Authorized, you are not",
             404 => "Resource found, it was not",
             500 =>

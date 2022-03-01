@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.Errors;
 using Priyosaj.Business.Data;
+using Priyosaj.Contacts.Constants;
 
 namespace Priyosaj.Api.Controllers;
 
@@ -26,10 +27,10 @@ public class BuggyController : BaseApiController
     }
     
     [HttpGet("test-auth")]
-    [Authorize]
+    [Authorize(Roles = UserRoles.Customer)]
     public ActionResult GetSecretStuff()
     {
-        return Ok("Super Secret Stuff");
+        return Ok("Super Secret Stuff for Admin");
     }
 
     [HttpGet("servererror")]

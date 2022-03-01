@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.Errors;
 using Priyosaj.Business.Services;
+using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Models.Identity;
 
 namespace Priyosaj.Api.Controllers;
@@ -34,7 +35,7 @@ public class AccountController : BaseApiController
 
         if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
 
-        return GetUserDto(user);
+        return await GetUserDto(user);
     }
 
     [HttpPost("register")]
@@ -49,15 +50,18 @@ public class AccountController : BaseApiController
         var result = await _userManager.CreateAsync(user, registerDto.Password);
         if (!result.Succeeded) return BadRequest(new ApiResponse(400));
 
-        return GetUserDto(user);
+        var roleResult = await _userManager.AddToRoleAsync(user, UserRoles.Customer);
+        if (!roleResult.Succeeded) return BadRequest(result.Errors);
+
+        return await GetUserDto(user);
     }
 
-    private UserDto GetUserDto(AppUser user)
+    private async Task<UserDto> GetUserDto(AppUser user)
     {
         return new UserDto
         {
             Email = user.Email,
-            Token = _tokenService.CreateToken(user),
+            Token = await _tokenService.CreateToken(user),
             UserName = user.UserName
         };
     }

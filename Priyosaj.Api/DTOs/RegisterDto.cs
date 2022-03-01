@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Priyosaj.Api.Controllers;
+namespace Priyosaj.Api.DTOs;
 
 public class RegisterDto
 {

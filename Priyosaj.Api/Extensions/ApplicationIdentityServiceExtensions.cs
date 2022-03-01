@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
+using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Interfaces;
 using Priyosaj.Contacts.Models.Identity;
 using StackExchange.Redis;
@@ -15,7 +16,8 @@ namespace Priyosaj.Api.Extensions;
 
 public static class ApplicationIdentityServiceExtensions
 {
-    public static IServiceCollection AddApplicationIdentityServices(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddApplicationIdentityServices(this IServiceCollection services,
+        IConfiguration config)
     {
         services.AddDbContextPool<AppIdentityDbContext>(options =>
         {
@@ -41,7 +43,7 @@ public static class ApplicationIdentityServiceExtensions
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters 
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
@@ -50,6 +52,12 @@ public static class ApplicationIdentityServiceExtensions
                     ValidateAudience = false
                 };
             });
+
+        services.AddAuthorization(opt =>
+        {
+            opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole(UserRolesConstants.Admin));
+            opt.AddPolicy("RequireEditorRole", policy => policy.RequireRole(UserRolesConstants.Admin, UserRolesConstants.Editor));
+        });
 
         return services;
     }

@@ -25,12 +25,19 @@ public class BuggyController : BaseApiController
 
         return Ok();
     }
-    
-    [HttpGet("test-auth")]
-    [Authorize(Roles = UserRoles.Customer)]
-    public ActionResult GetSecretStuff()
+
+    [HttpGet("test-admin-auth")]
+    [Authorize(Policy = UserRolePoliciesConstants.RequireAdminRole)]
+    public ActionResult GetAdminSecretStuff()
     {
         return Ok("Super Secret Stuff for Admin");
+    }
+
+    [HttpGet("test-editor-auth")]
+    [Authorize(Policy = UserRolePoliciesConstants.RequireEditorRole)]
+    public ActionResult GetEditorSecretStuff()
+    {
+        return Ok("Secret Stuff for Editor");
     }
 
     [HttpGet("servererror")]

@@ -1,6 +1,6 @@
 namespace Priyosaj.Contacts.Constants;
 
-public static class UserRoles
+public static class UserRolesConstants
 {
     public const string Admin = "admin";
     public const string Editor = "editor";

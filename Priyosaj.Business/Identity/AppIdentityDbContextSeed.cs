@@ -13,9 +13,9 @@ public class AppIdentityDbContextSeed
 
         var roles = new List<AppRole>
         {
-            new() {Name = UserRoles.Admin},
-            new() {Name = UserRoles.Editor},
-            new() {Name = UserRoles.Customer}
+            new() {Name = UserRolesConstants.Admin},
+            new() {Name = UserRolesConstants.Editor},
+            new() {Name = UserRolesConstants.Customer}
         };
 
         foreach (var role in roles)
@@ -28,7 +28,7 @@ public class AppIdentityDbContextSeed
         var user = new AppUser
         {
             UserName = "Bala",
-            Email = "bala@bs.com",
+            Email = "c1@ex.com",
             Addresses = new List<Address>
             {
                 new()
@@ -42,7 +42,7 @@ public class AppIdentityDbContextSeed
             }
         };
         await userManager.CreateAsync(user, "Pa$$0rd");
-        await userManager.AddToRoleAsync(user, UserRoles.Customer);
+        await userManager.AddToRoleAsync(user, UserRolesConstants.Customer);
 
         var admin = new AppUser
         {
@@ -50,6 +50,14 @@ public class AppIdentityDbContextSeed
             Email = "ssd@ex.com",
         };
         await userManager.CreateAsync(admin, "Pa$$0rd");
-        await userManager.AddToRolesAsync(admin, new[] {UserRoles.Admin, UserRoles.Editor});
+        await userManager.AddToRolesAsync(admin, new[] {UserRolesConstants.Admin, UserRolesConstants.Editor});
+        
+        var editor = new AppUser
+        {
+            UserName = "dip",
+            Email = "e1@ex.com",
+        };
+        await userManager.CreateAsync(editor, "123123");
+        await userManager.AddToRolesAsync(editor, new[] {UserRolesConstants.Editor});
     }
 }

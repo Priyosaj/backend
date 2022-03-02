@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Priyosaj.Business.Identity.Migrations
 {
-    public partial class IdentityInitial : Migration
+    public partial class IdentityUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

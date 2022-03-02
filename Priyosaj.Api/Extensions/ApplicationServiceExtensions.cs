@@ -25,7 +25,7 @@ public static class ApplicationServiceExtensions
         
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
-        // services.AddScoped<IUserRepository, UserRepository>();
+        
         // services.AddDbContextPool<StoreContext>(options =>
         // {
         //     options.UseSqlite(config.GetConnectionString("DBConnectionString"));
@@ -35,12 +35,6 @@ public static class ApplicationServiceExtensions
         {
             options.UseNpgsql(config.GetConnectionString("PostgresConnection"));
         });
-        
-        // services.AddDbContextPool<AppIdentityDbContext>(options =>
-        // {
-        //     options.UseNpgsql(config.GetConnectionString("PostgresIdentityConnection"));
-        // });
-        //
         
         services.Configure<ApiBehaviorOptions>(options => 
         {

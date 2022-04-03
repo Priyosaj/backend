@@ -9,7 +9,7 @@ public class BaseRepositoryItem : IRepositoryItem
         return Id;
     }
 
-    public Guid Id;
+    public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime ModifiedAt { get; set; } = DateTime.Now;
 }

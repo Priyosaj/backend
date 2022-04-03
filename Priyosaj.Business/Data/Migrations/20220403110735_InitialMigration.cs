@@ -198,6 +198,26 @@ namespace Priyosaj.Business.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    AppUserId = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
                 {
@@ -214,6 +234,28 @@ namespace Priyosaj.Business.Data.Migrations
                         name: "FK_ProductCategories_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderedItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductTitle = table.Column<string>(type: "text", nullable: false),
+                    RegularPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    DiscountPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderedItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderedItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id");
                 });
 
@@ -260,6 +302,16 @@ namespace Priyosaj.Business.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderedItems_OrderId",
+                table: "OrderedItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_AppUserId",
+                table: "Orders",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductCategories_ProductId",
                 table: "ProductCategories",
                 column: "ProductId");
@@ -286,16 +338,22 @@ namespace Priyosaj.Business.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "OrderedItems");
+
+            migrationBuilder.DropTable(
                 name: "ProductCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

@@ -261,6 +261,61 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("Priyosaj.Contacts.Models.Order.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Priyosaj.Contacts.Models.Order.OrderedItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProductTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("RegularPrice")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderedItems");
+                });
+
             modelBuilder.Entity("Priyosaj.Contacts.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -384,6 +439,24 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Priyosaj.Contacts.Models.Order.Order", b =>
+                {
+                    b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Priyosaj.Contacts.Models.Order.OrderedItem", b =>
+                {
+                    b.HasOne("Priyosaj.Contacts.Models.Order.Order", null)
+                        .WithMany("OrderedItems")
+                        .HasForeignKey("OrderId");
+                });
+
             modelBuilder.Entity("Priyosaj.Contacts.Models.ProductCategory", b =>
                 {
                     b.HasOne("Priyosaj.Contacts.Models.Product", null)
@@ -401,6 +474,11 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Priyosaj.Contacts.Models.Order.Order", b =>
+                {
+                    b.Navigation("OrderedItems");
                 });
 
             modelBuilder.Entity("Priyosaj.Contacts.Models.Product", b =>

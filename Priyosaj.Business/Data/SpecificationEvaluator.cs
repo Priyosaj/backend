@@ -5,7 +5,7 @@ using Priyosaj.Contacts.Specifications;
 
 namespace Priyosaj.Business.Data;
 
-public class SpecificationEvaluator<TEntity> where TEntity : BaseRepositoryItem
+public static class SpecificationEvaluator<TEntity> where TEntity : BaseRepositoryItem
 {
     public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> spec)
     {

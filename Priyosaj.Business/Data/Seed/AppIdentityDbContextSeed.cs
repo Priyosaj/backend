@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Models.Identity;
 
-namespace Priyosaj.Business.Identity;
+namespace Priyosaj.Business.Data.Seed;
 
-public class AppIdentityDbContextSeed
+public static class AppIdentityDbContextSeed
 {
     public static async Task SeedUsersAsync(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
@@ -50,8 +50,8 @@ public class AppIdentityDbContextSeed
             Email = "ssd@ex.com",
         };
         await userManager.CreateAsync(admin, "Pa$$0rd");
-        await userManager.AddToRolesAsync(admin, new[] {UserRolesConstants.Admin, UserRolesConstants.Editor});
-        
+        await userManager.AddToRolesAsync(admin, new[] {UserRolesConstants.Admin});
+
         var editor = new AppUser
         {
             UserName = "dip",

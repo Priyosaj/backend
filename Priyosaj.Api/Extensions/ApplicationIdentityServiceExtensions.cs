@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Priyosaj.Business.Data;
-using Priyosaj.Business.Identity;
 using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Models.Identity;
 
@@ -15,10 +14,10 @@ public static class ApplicationIdentityServiceExtensions
     public static IServiceCollection AddApplicationIdentityServices(this IServiceCollection services,
         IConfiguration config)
     {
-        services.AddDbContextPool<AppIdentityDbContext>(options =>
-        {
-            options.UseNpgsql(config.GetConnectionString("PostgresIdentityConnection"));
-        });
+        // services.AddDbContextPool<AppIdentityDbContext>(options =>
+        // {
+        //     options.UseNpgsql(config.GetConnectionString("PostgresIdentityConnection"));
+        // });
 
         var builder = services.AddIdentityCore<AppUser>(opt =>
         {
@@ -34,7 +33,7 @@ public static class ApplicationIdentityServiceExtensions
         builder.AddRoleManager<RoleManager<AppRole>>();
         builder.AddRoleValidator<RoleValidator<AppRole>>();
         builder.AddSignInManager<SignInManager<AppUser>>();
-        builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+        builder.AddEntityFrameworkStores<StoreContext>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

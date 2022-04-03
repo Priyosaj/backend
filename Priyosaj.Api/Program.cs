@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Extensions;
 using Priyosaj.Api.Middlewares;
 using Priyosaj.Business.Data;
-using Priyosaj.Business.Identity;
+using Priyosaj.Business.Data.Seed;
 using Priyosaj.Contacts.Models.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,11 +56,10 @@ try
 {
     var context = services.GetRequiredService<StoreContext>();
     await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
 
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+    var identityContext = services.GetRequiredService<StoreContext>();
     await identityContext.Database.MigrateAsync();
     await AppIdentityDbContextSeed.SeedUsersAsync(userManager, roleManager);
 }

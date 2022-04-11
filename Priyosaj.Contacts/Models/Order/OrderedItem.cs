@@ -13,4 +13,7 @@ public class OrderedItem : BaseRepositoryItem
     // public decimal DiscountPrice { get; set; }
     
     public decimal SellingPrice { get; set; }
+
+    public Guid OrderId { get; set; }
+    public Order Order { get; set; }
 }

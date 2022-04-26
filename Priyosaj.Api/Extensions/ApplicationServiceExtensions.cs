@@ -18,6 +18,8 @@ public static class ApplicationServiceExtensions
             var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
             return ConnectionMultiplexer.Connect(configuration);
         });
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);

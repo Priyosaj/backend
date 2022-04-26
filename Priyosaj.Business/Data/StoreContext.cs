@@ -2,9 +2,9 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Models;
-using Priyosaj.Contacts.Models.Identity;
-using Priyosaj.Contacts.Models.Order;
+using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.Order;
+using Priyosaj.Contacts.Entities.Product;
 
 namespace Priyosaj.Business.Data;
 
@@ -38,4 +38,5 @@ public class StoreContext :  IdentityDbContext<AppUser, AppRole, string,
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderedItem> OrderedItems { get; set; }
+    public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 }

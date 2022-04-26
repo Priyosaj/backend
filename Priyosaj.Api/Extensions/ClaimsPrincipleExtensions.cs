@@ -4,8 +4,8 @@ namespace Priyosaj.Api.Extensions;
 
 public static class ClaimsPrincipleExtensions
 {
-    public static string? GetUserName(this ClaimsPrincipal user)
+    public static string? GetUserEmail(this ClaimsPrincipal user)
     {
-        return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return user.FindFirstValue(ClaimTypes.Email);
     }
 }

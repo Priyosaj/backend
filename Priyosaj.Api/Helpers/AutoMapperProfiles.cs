@@ -1,6 +1,6 @@
 using AutoMapper;
 using Priyosaj.Api.DTOs;
-using Priyosaj.Contacts.Models;
+using Priyosaj.Contacts.Entities.Product;
 
 namespace Priyosaj.Api.Helpers;
 

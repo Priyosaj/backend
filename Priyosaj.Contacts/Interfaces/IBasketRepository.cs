@@ -1,4 +1,4 @@
-using Priyosaj.Contacts.Models;
+using Priyosaj.Contacts.Entities.Basket;
 
 namespace Priyosaj.Contacts.Interfaces;
 

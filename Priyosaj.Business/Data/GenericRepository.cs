@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Priyosaj.Contacts.Entities;
 using Priyosaj.Contacts.Interfaces;
-using Priyosaj.Contacts.Models;
 using Priyosaj.Contacts.Specifications;
 
 namespace Priyosaj.Business.Data;
@@ -26,7 +26,23 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseReposito
 
     public async Task<int> CountAsync(ISpecification<T> spec)
     {
-        return await ApplySpecification(spec).CountAsync() ;
+        return await ApplySpecification(spec).CountAsync();
+    }
+
+    public void Add(T entity)
+    {
+        _context.Set<T>().Add(entity);
+    }
+
+    public void Update(T entity)
+    {
+        _context.Set<T>().Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+    }
+
+    public void Delete(T entity)
+    {
+        _context.Set<T>().Remove(entity);
     }
 
     public async Task<T?> GetEntityWithSpec(ISpecification<T> spec)

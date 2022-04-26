@@ -1,6 +1,6 @@
 using System.Text.Json;
+using Priyosaj.Contacts.Entities.Basket;
 using Priyosaj.Contacts.Interfaces;
-using Priyosaj.Contacts.Models;
 using StackExchange.Redis;
 
 namespace Priyosaj.Business.Data;

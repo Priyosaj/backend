@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Priyosaj.Contacts.Models;
+using Priyosaj.Contacts.Entities.Product;
 
 namespace Priyosaj.Contacts.Specifications;
 

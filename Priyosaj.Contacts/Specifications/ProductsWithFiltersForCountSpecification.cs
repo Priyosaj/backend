@@ -1,4 +1,4 @@
-using Priyosaj.Contacts.Models;
+using Priyosaj.Contacts.Entities.Product;
 
 namespace Priyosaj.Contacts.Specifications;
 

@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Priyosaj.Contacts.Models;
 
 namespace Priyosaj.Api.DTOs;
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Models.Identity;
+using Priyosaj.Contacts.Entities.Identity;
 
 namespace Priyosaj.Api.Extensions;
 

@@ -4,8 +4,8 @@ using Priyosaj.Api.DTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
+using Priyosaj.Contacts.Entities.Product;
 using Priyosaj.Contacts.Interfaces;
-using Priyosaj.Contacts.Models;
 using Priyosaj.Contacts.Specifications;
 
 namespace Priyosaj.Api.Controllers;

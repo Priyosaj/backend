@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Models.Identity;
+using Priyosaj.Contacts.Entities.Identity;
 
 namespace Priyosaj.Business.Data.Seed;
 

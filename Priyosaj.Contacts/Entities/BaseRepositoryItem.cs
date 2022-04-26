@@ -1,6 +1,6 @@
 ﻿using Priyosaj.Contacts.Interfaces;
 
-namespace Priyosaj.Contacts.Models;
+namespace Priyosaj.Contacts.Entities;
 
 public class BaseRepositoryItem : IRepositoryItem
 {

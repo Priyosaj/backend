@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Priyosaj.Contacts.Models.Identity;
+namespace Priyosaj.Contacts.Entities.Identity;
 
 public class AppUser : IdentityUser
 {

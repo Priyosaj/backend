@@ -1,4 +1,4 @@
-namespace Priyosaj.Contacts.Models.Identity;
+namespace Priyosaj.Contacts.Entities.Identity;
 
 public class Address : BaseRepositoryItem
 {

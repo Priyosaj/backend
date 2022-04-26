@@ -1,6 +1,4 @@
-﻿using Priyosaj.Contacts.Interfaces;
-
-namespace Priyosaj.Contacts.Models;
+﻿namespace Priyosaj.Contacts.Entities.Product;
 
 public class ProductCategory : BaseRepositoryItem
 {

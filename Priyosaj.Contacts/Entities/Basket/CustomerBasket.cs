@@ -1,4 +1,4 @@
-namespace Priyosaj.Contacts.Models;
+namespace Priyosaj.Contacts.Entities.Basket;
 
 public class CustomerBasket
 {

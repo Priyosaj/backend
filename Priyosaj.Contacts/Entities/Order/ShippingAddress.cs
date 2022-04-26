@@ -1,4 +1,4 @@
-﻿namespace Priyosaj.Contacts.Models.Order;
+﻿namespace Priyosaj.Contacts.Entities.Order;
 
 public class ShippingAddress
 {

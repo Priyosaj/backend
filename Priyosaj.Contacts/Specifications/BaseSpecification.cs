@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Query;
 using Priyosaj.Contacts.Interfaces;
 
 namespace Priyosaj.Contacts.Specifications;
@@ -15,7 +16,6 @@ public class BaseSpecification<T> : ISpecification<T>
     }
 
     public Expression<Func<T, bool>>? Criteria { get; }
-    public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
 
     public Expression<Func<T, object>>? OrderBy { get; private set; }
 
@@ -27,7 +27,9 @@ public class BaseSpecification<T> : ISpecification<T>
 
     public bool IsPagingEnabled { get; private set; }
 
-    protected void AddInclude(Expression<Func<T, object>> includeExpression)
+    public List<Func<IQueryable<T>, IIncludableQueryable<T, object>>> Includes { get; } = new List<Func<IQueryable<T>, IIncludableQueryable<T, object>>>();
+
+    protected void AddInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> includeExpression)
     {
         Includes.Add(includeExpression);
     }

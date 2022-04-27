@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Entities.Product;
 
 namespace Priyosaj.Contacts.Specifications;
@@ -6,7 +7,7 @@ public class ProductDemoSpecification : BaseSpecification<Product>
 {
     public ProductDemoSpecification()
     {
-        AddInclude(x => x.ProductCategories);
+        AddInclude(x => x.Include(p => p.ProductCategories));
     }
 
     public ProductDemoSpecification(ProductSpecParams productParams) : base(x =>
@@ -15,7 +16,7 @@ public class ProductDemoSpecification : BaseSpecification<Product>
         // && (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
     )
     {
-        AddInclude(x => x.ProductCategories);
+        AddInclude(x => x.Include(p => p.ProductCategories));
 
         ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 

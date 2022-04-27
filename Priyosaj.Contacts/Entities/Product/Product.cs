@@ -9,5 +9,4 @@ public class Product : BaseRepositoryItem
     public decimal DiscountPrice { get; set; }
 
     public ICollection<ProductCategory> ProductCategories { get; set; } = null!;
-    // public Guid ProductCategoryId { get; set; }
 }

@@ -22,6 +22,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         services.AddScoped<ITokenService, TokenService>();
         

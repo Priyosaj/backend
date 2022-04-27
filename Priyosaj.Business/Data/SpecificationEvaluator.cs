@@ -31,8 +31,8 @@ public static class SpecificationEvaluator<TEntity> where TEntity : BaseReposito
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
 
-        query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
-
+        query = spec.Includes.Aggregate(query, (current, include) => include(current));
+        
         return query;
     }
 }

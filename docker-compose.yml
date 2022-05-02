@@ -3,6 +3,7 @@ services:
 
   redis:
     image: redis:latest
+    restart: always
     ports:
       - 4320:6379
     command: [ "redis-server", "--appendonly", "yes" ]
@@ -11,6 +12,7 @@ services:
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+#    restart: always
     environment:
       - REDIS_HOSTS=local:redis:6379
       - HTTP_USER=root
@@ -31,7 +33,7 @@ services:
 
   mssqlDB:
     image: "mcr.microsoft.com/mssql/server"
-    restart: always
+#    restart: always
     environment:
       SA_PASSWORD: "Your_password123"
       ACCEPT_EULA: "Y"
@@ -40,7 +42,7 @@ services:
 
   adminer:
     image: adminer
-    restart: always
+#    restart: always
     ports:
       - 8080:8080
   # dotnet:

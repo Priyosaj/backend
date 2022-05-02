@@ -13,6 +13,7 @@ public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         services.AddSingleton<IConnectionMultiplexer>(c =>
         {
             var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);

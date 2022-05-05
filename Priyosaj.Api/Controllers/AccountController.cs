@@ -1,12 +1,10 @@
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.DTOs;
 using Priyosaj.Api.Errors;
-using Priyosaj.Business.Services;
 using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Entities.Identity;
-using Priyosaj.Contacts.Interfaces;
+using Priyosaj.Contacts.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers;
 

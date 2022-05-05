@@ -52,6 +52,7 @@ app.MapControllers();
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
+var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 try
 {
     var context = services.GetRequiredService<StoreContext>();
@@ -62,6 +63,7 @@ try
     var identityContext = services.GetRequiredService<StoreContext>();
     await identityContext.Database.MigrateAsync();
     await AppIdentityDbContextSeed.SeedUsersAsync(userManager, roleManager);
+    await StoreContextSeed.SeedAsync(context, loggerFactory);
 }
 catch (Exception ex)
 {

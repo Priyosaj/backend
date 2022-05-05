@@ -1,7 +1,7 @@
 using Priyosaj.Contacts.Entities;
 using Priyosaj.Contacts.Specifications;
 
-namespace Priyosaj.Contacts.Interfaces;
+namespace Priyosaj.Contacts.Interfaces.Repositories;
 
 public interface IGenericRepository<T> where T : BaseRepositoryItem
 {

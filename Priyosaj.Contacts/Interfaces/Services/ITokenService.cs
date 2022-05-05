@@ -1,6 +1,6 @@
 using Priyosaj.Contacts.Entities.Identity;
 
-namespace Priyosaj.Contacts.Interfaces;
+namespace Priyosaj.Contacts.Interfaces.Services;
 
 public interface ITokenService
 {

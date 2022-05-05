@@ -1,4 +1,4 @@
-﻿using Priyosaj.Contacts.Interfaces;
+﻿using Priyosaj.Contacts.Interfaces.Repositories;
 
 namespace Priyosaj.Contacts.Entities;
 

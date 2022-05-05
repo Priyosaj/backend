@@ -1,7 +1,7 @@
 ﻿using Priyosaj.Contacts.Entities.Identity;
 using Priyosaj.Contacts.Entities.Order;
-using Priyosaj.Contacts.Entities.Product;
-using Priyosaj.Contacts.Interfaces;
+using Priyosaj.Contacts.Interfaces.Repositories;
+using Priyosaj.Contacts.Interfaces.Services;
 using Priyosaj.Contacts.Specifications;
 
 namespace Priyosaj.Business.Services;

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using Priyosaj.Contacts.Entities;
-using Priyosaj.Contacts.Interfaces;
+using Priyosaj.Contacts.Interfaces.Repositories;
 
 namespace Priyosaj.Business.Data;
 

@@ -4,7 +4,8 @@ using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
 using Priyosaj.Business.Services;
-using Priyosaj.Contacts.Interfaces;
+using Priyosaj.Contacts.Interfaces.Repositories;
+using Priyosaj.Contacts.Interfaces.Services;
 using StackExchange.Redis;
 
 namespace Priyosaj.Api.Extensions;

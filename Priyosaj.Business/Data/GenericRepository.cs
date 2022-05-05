@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Entities;
-using Priyosaj.Contacts.Interfaces;
+using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Specifications;
 
 namespace Priyosaj.Business.Data;

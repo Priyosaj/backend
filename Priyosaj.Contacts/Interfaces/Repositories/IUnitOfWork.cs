@@ -1,6 +1,6 @@
 ﻿using Priyosaj.Contacts.Entities;
 
-namespace Priyosaj.Contacts.Interfaces;
+namespace Priyosaj.Contacts.Interfaces.Repositories;
 
 public interface IUnitOfWork : IDisposable
 {

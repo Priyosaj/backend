@@ -1,7 +1,7 @@
 using Priyosaj.Contacts.Entities.Product;
 using Priyosaj.Contacts.Specifications;
 
-namespace Priyosaj.Contacts.Interfaces;
+namespace Priyosaj.Contacts.Interfaces.Services;
 
 public interface IProductCategoryService
 {

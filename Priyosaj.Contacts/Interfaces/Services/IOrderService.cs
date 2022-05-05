@@ -1,7 +1,7 @@
 ﻿using Priyosaj.Contacts.Entities.Identity;
 using Priyosaj.Contacts.Entities.Order;
 
-namespace Priyosaj.Contacts.Interfaces;
+namespace Priyosaj.Contacts.Interfaces.Services;
 
 public interface IOrderService
 {

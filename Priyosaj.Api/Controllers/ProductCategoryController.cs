@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.DTOs;
 using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
 
 namespace Priyosaj.Api.Controllers;
 
@@ -12,8 +12,8 @@ public class ProductCategoryController : BaseApiController
     private readonly IMapper _mapper;
     public ProductCategoryController(IProductCategoryService productCategoryService, IMapper mapper)
     {
-        _mapper = mapper;
         _productCategoryService = productCategoryService;
+        _mapper = mapper;
     }
 
     [HttpGet]

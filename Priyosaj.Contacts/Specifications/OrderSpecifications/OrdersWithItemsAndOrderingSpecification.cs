@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Entities.Order;
 
-namespace Priyosaj.Contacts.Specifications;
+namespace Priyosaj.Contacts.Specifications.OrderSpecifications;
 
 public class OrdersWithItemsAndOrderingSpecification : BaseSpecification<Order>
 {

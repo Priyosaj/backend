@@ -2,7 +2,7 @@
 using Priyosaj.Contacts.Entities.Order;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Contacts.Specifications.OrderSpecifications;
 
 namespace Priyosaj.Business.Services;
 

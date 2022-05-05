@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Contacts.Entities.Product;
 
-namespace Priyosaj.Contacts.Specifications;
+namespace Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
 
 public class ProductCategoryDemoSpecification : BaseSpecification<ProductCategory>
 {

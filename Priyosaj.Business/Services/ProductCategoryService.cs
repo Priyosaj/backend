@@ -1,9 +1,7 @@
-using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Priyosaj.Contacts.Entities.Product;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
 
 namespace Priyosaj.Business.Services;
 

@@ -1,6 +1,6 @@
 using Priyosaj.Contacts.Entities.Product;
 
-namespace Priyosaj.Contacts.Specifications;
+namespace Priyosaj.Contacts.Specifications.ProductSpecifications;
 
 public class ProductsWithFiltersForCountSpecification : BaseSpecification<Product>
 {

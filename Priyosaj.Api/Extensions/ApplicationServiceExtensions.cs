@@ -25,6 +25,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<ITokenService, TokenService>();
 
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));

@@ -1,5 +1,5 @@
 using Priyosaj.Contacts.Entities.Product;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
 
 namespace Priyosaj.Contacts.Interfaces.Services;
 

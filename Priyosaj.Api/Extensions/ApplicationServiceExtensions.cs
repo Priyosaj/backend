@@ -14,6 +14,7 @@ public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         services.AddSingleton<IConnectionMultiplexer>(c =>
         {
             var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
@@ -23,26 +24,25 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         services.AddScoped<ITokenService, TokenService>();
-        
+
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
-        
+
         // services.AddDbContextPool<StoreContext>(options =>
         // {
         //     options.UseSqlite(config.GetConnectionString("DBConnectionString"));
         // });
-        
+
         services.AddDbContextPool<StoreContext>(options =>
         {
             options.UseNpgsql(config.GetConnectionString("PostgresConnection"));
         });
-        
-        services.Configure<ApiBehaviorOptions>(options => 
+
+        services.Configure<ApiBehaviorOptions>(options =>
         {
-            options.InvalidModelStateResponseFactory = actionContext => 
+            options.InvalidModelStateResponseFactory = actionContext =>
             {
                 var errors = actionContext.ModelState
                     .Where(e => e.Value.Errors.Count > 0)

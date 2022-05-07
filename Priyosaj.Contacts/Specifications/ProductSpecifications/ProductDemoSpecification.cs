@@ -20,7 +20,7 @@ public class ProductDemoSpecification : BaseSpecification<Product>
 
         ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
-        if (!string.IsNullOrEmpty(productParams.Sort))
+        /* if (!string.IsNullOrEmpty(productParams.Sort))
         {
             switch (productParams.Sort)
             {
@@ -34,6 +34,14 @@ public class ProductDemoSpecification : BaseSpecification<Product>
                     AddOrderBy(p => p.Title);
                     break;
             }
+        }
+        else
+        {
+            AddOrderByDescending(x => x.Title);
+        } */
+        if (!string.IsNullOrEmpty(productParams.Sort))
+        {
+            ApplySorting(productParams.Sort);
         }
         else
         {

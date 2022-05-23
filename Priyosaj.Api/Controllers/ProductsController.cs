@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.DTOs;
+using Priyosaj.Api.DTOs.ProductDTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;

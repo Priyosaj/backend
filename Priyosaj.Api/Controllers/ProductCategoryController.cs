@@ -1,6 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.DTOs;
+using Priyosaj.Api.DTOs.ProductCategoryDTOs;
 using Priyosaj.Contacts.Interfaces.Services;
 using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
 
@@ -25,13 +25,4 @@ public class ProductCategoryController : BaseApiController
         var resCategories = _mapper.Map<IReadOnlyList<ProductCategoryResponseDto>>(categories);
         return Ok(resCategories);
     }
-
-    // [HttpPost]
-    // public async Task<ActionResult<ProductCategory>> CreateCategory([FromBody] ProductCategory category)
-    // {
-    //     _context.ProductCategories.Add(category);
-    //     await _context.SaveChangesAsync();
-    //     return Ok(category);
-    // }
-
 }

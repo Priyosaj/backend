@@ -28,18 +28,47 @@ public class ProductCategoryService : IProductCategoryService
         throw new NotImplementedException();
     }
 
-    public Task DeleteCategoryAsync(Guid id)
+    public async Task DeleteCategoryAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var category = await _productCategoryRepository.GetByIdAsync(id);
+        if (category == null)
+        {
+            throw new Exception("Category not found");
+        }
+        category.DeletedAt = DateTime.Now;
+        _unitOfWork.Repository<ProductCategory>().Update(category);
+        var result = await _unitOfWork.Complete();
+        if (result<=0)
+        {
+            throw new Exception("Category not deleted");
+        }
     }
 
-    public Task UpdateCategoryAsync(ProductCategory category)
+    public async Task UpdateCategoryAsync(Guid id, ProductCategory category)
     {
-        throw new NotImplementedException();
+        var existingCategory = await _productCategoryRepository.GetByIdAsync(id);
+        if(existingCategory==null)
+        {
+            throw new Exception("Category not found");
+        }
+        existingCategory.Title = category.Title;
+        existingCategory.ParentId = category.ParentId;
+        _unitOfWork.Repository<ProductCategory>().Update(existingCategory);
+        var result = await _unitOfWork.Complete();
+        if (result <= 0)
+        {
+            throw new Exception("Category not updated");
+        }
     }
 
-    public Task CreateCategoryAsync(ProductCategory category)
+    public async Task CreateCategoryAsync(ProductCategory category)
     {
-        throw new NotImplementedException();
+        _unitOfWork.Repository<ProductCategory>().Add(category);
+        
+        var result = await _unitOfWork.Complete(); 
+        if (result <= 0)
+        {
+            throw new Exception("Category creation failed");
+        }
     }
 }

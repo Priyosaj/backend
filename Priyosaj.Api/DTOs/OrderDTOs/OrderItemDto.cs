@@ -1,4 +1,4 @@
-﻿namespace Priyosaj.Api.DTOs;
+﻿namespace Priyosaj.Api.DTOs.OrderDTOs;
 
 public class OrderItemDto
 {

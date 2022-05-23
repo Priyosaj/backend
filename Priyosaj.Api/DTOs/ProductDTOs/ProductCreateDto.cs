@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Priyosaj.Api.DTOs;
+namespace Priyosaj.Api.DTOs.ProductDTOs;
 
 public class ProductCreateDto
 {

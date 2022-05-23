@@ -1,6 +1,6 @@
 using Priyosaj.Contacts.Entities.Product;
 
-namespace Priyosaj.Api.DTOs;
+namespace Priyosaj.Api.DTOs.ProductDTOs;
 
 public class ProductResponseDto
 {

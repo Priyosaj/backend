@@ -26,13 +26,17 @@ public static class SpecificationEvaluator<TEntity> where TEntity : BaseReposito
             query = query.OrderByDescending(spec.OrderByDescending);
         }
 
+        if (spec.GroupBy != null)
+        {
+            query = query.GroupBy(spec.GroupBy).SelectMany(x => x);
+        }
+
         if (spec.IsPagingEnabled)
         {
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
 
         query = spec.Includes.Aggregate(query, (current, include) => include(current));
-        
         return query;
     }
 }

@@ -1,9 +1,8 @@
-namespace Priyosaj.Api.DTOs;
+namespace Priyosaj.Api.DTOs.ProductCategoryDTOs;
 
 public class ProductCategoryResponseDto
 {
     public Guid Id { get; set; }
     public string Title { get; set; }
-    public string Description { get; set; }
     public ICollection<ProductCategoryResponseDto?> SubCategories { get; set; }
 }

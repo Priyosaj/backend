@@ -9,7 +9,10 @@ using Priyosaj.Contacts.Entities.Identity;
 namespace Priyosaj.Api.Controllers.SuperControllers;
 
 [Authorize(Policy = UserRolePoliciesConstants.RequireAdminRole)]
-public class AdminController : BaseApiController
+
+[ApiController]
+[Route("api-super/[controller]")]
+public class AdminController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<AppRole> _roleManager;

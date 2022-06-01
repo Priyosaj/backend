@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.IdentityEntities;
 using Priyosaj.Contacts.Interfaces.Services;
 
 namespace Priyosaj.Business.Services;

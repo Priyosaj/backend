@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Priyosaj.Contacts.Entities.Order;
+namespace Priyosaj.Contacts.Entities.OrderEntities;
 
 public enum OrderStatus
 {

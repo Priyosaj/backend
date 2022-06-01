@@ -1,4 +1,4 @@
-﻿namespace Priyosaj.Contacts.Entities.Order;
+﻿namespace Priyosaj.Contacts.Entities.OrderEntities;
 
 public class DeliveryMethod : BaseRepositoryItem
 {

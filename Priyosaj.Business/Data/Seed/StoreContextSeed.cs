@@ -1,6 +1,6 @@
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using Priyosaj.Contacts.Entities.Product;
+using Priyosaj.Contacts.Entities.ProductEntities;
 
 namespace Priyosaj.Business.Data.Seed;
 

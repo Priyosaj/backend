@@ -1,6 +1,6 @@
-﻿using Priyosaj.Contacts.Entities.Identity;
+﻿using Priyosaj.Contacts.Entities.IdentityEntities;
 
-namespace Priyosaj.Contacts.Entities.Order;
+namespace Priyosaj.Contacts.Entities.OrderEntities;
 
 public class Order : BaseRepositoryItem
 {

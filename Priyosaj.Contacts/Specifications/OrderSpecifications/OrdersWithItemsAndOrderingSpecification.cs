@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Entities.Order;
+using Priyosaj.Contacts.Entities.OrderEntities;
 
 namespace Priyosaj.Contacts.Specifications.OrderSpecifications;
 

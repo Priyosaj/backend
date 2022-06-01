@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.DTOs;
 using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.IdentityEntities;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 

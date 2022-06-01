@@ -2,9 +2,10 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Entities.Identity;
-using Priyosaj.Contacts.Entities.Order;
-using Priyosaj.Contacts.Entities.Product;
+using Priyosaj.Contacts.Entities.IdentityEntities;
+using Priyosaj.Contacts.Entities.OrderEntities;
+using Priyosaj.Contacts.Entities.ProductEntities;
+using Priyosaj.Contacts.Entities.PromotionalEventEntities;
 
 namespace Priyosaj.Business.Data;
 
@@ -32,6 +33,9 @@ public class StoreContext :  IdentityDbContext<AppUser, AppRole, string,
             .WithOne(u => u.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+
+        builder.Entity<PromotionalEventProductMapping>()
+            .HasKey(nameof(PromotionalEventProductMapping.PromotionalEventId), nameof(PromotionalEventProductMapping.ProductId));
     }
 
     public DbSet<Product> Products { get; set; }
@@ -39,4 +43,6 @@ public class StoreContext :  IdentityDbContext<AppUser, AppRole, string,
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderedItem> OrderedItems { get; set; }
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+    public DbSet<PromotionalEvent> PromotionalEvents { get; set; }
+    public DbSet<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; }
 }

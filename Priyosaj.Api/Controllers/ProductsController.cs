@@ -4,7 +4,7 @@ using Priyosaj.Api.DTOs.ProductDTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
-using Priyosaj.Contacts.Entities.Product;
+using Priyosaj.Contacts.Entities.ProductEntities;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Specifications.ProductSpecifications;
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
-namespace Priyosaj.Contacts.Entities.Product;
+namespace Priyosaj.Contacts.Entities.ProductEntities;
 
 [Index(nameof(Title), IsUnique = true)]
 public class ProductCategory : BaseRepositoryItem

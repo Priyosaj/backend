@@ -1,4 +1,4 @@
-namespace Priyosaj.Contacts.Entities.Basket;
+namespace Priyosaj.Contacts.Entities.BasketEntities;
 
 public class BasketItem
 {

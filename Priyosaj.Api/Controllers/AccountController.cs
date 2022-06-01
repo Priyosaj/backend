@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.DTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.IdentityEntities;
 using Priyosaj.Contacts.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers;

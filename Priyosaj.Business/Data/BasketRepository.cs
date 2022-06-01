@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Priyosaj.Contacts.Entities.Basket;
+using Priyosaj.Contacts.Entities.BasketEntities;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using StackExchange.Redis;
 

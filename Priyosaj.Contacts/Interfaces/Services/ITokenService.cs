@@ -1,4 +1,4 @@
-using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.IdentityEntities;
 
 namespace Priyosaj.Contacts.Interfaces.Services;
 

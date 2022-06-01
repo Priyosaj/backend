@@ -1,4 +1,4 @@
-﻿using Priyosaj.Contacts.Entities.Order;
+﻿using Priyosaj.Contacts.Entities.OrderEntities;
 
 namespace Priyosaj.Api.DTOs.OrderDTOs;
 

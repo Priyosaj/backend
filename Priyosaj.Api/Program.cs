@@ -4,7 +4,7 @@ using Priyosaj.Api.Extensions;
 using Priyosaj.Api.Middlewares;
 using Priyosaj.Business.Data;
 using Priyosaj.Business.Data.Seed;
-using Priyosaj.Contacts.Entities.Identity;
+using Priyosaj.Contacts.Entities.IdentityEntities;
 
 var builder = WebApplication.CreateBuilder(args);
 

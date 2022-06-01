@@ -1,4 +1,4 @@
-using Priyosaj.Contacts.Entities.Basket;
+using Priyosaj.Contacts.Entities.BasketEntities;
 
 namespace Priyosaj.Contacts.Interfaces.Repositories;
 

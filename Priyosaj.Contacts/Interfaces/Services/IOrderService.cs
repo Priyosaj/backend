@@ -1,5 +1,5 @@
-﻿using Priyosaj.Contacts.Entities.Identity;
-using Priyosaj.Contacts.Entities.Order;
+﻿using Priyosaj.Contacts.Entities.IdentityEntities;
+using Priyosaj.Contacts.Entities.OrderEntities;
 
 namespace Priyosaj.Contacts.Interfaces.Services;
 

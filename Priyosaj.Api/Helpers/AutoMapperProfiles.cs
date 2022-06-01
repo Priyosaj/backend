@@ -1,7 +1,7 @@
 using AutoMapper;
 using Priyosaj.Api.DTOs.ProductCategoryDTOs;
 using Priyosaj.Api.DTOs.ProductDTOs;
-using Priyosaj.Contacts.Entities.Product;
+using Priyosaj.Contacts.Entities.ProductEntities;
 
 namespace Priyosaj.Api.Helpers;
 

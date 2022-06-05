@@ -30,21 +30,14 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Product>> GetProductAsync(Guid id)
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductResponseDto>> GetProductAsync(Guid id)
     {
         _logger.LogInformation("Returning Product: " + id);
 
         var product = await _productService.GetProductByIdAsync(id);
 
         return Ok(product);
-    }
-
-    [HttpPost]
-    public async Task<ActionResult> CreateProductAsync(ProductCreateDto product)
-    {
-        await _productService.CreateProductAsync(product);
-        return NoContent();
     }
 }

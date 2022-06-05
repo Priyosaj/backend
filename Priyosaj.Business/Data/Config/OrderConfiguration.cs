@@ -14,5 +14,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 o => o.ToString(),
                 o => (OrderStatus) Enum.Parse(typeof(OrderStatus), o)
             );
+        //test
     }
 }

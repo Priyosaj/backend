@@ -1,8 +1,8 @@
 namespace Priyosaj.Api.Errors;
 
-public class ApiException : ApiResponse
+public class ApiErrorResponse : ApiResponse
 {
-    public ApiException(int statusCode, string? message = null, string? details = null) 
+    public ApiErrorResponse(int statusCode, string? message = null, string? details = null) 
         : base(statusCode, message)
     {
         Details = details;

@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.DTOs.ProductCategoryDTOs;
+using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
 using Priyosaj.Contacts.Entities.IdentityEntities;
 using Priyosaj.Contacts.Entities.ProductEntities;
 using Priyosaj.Contacts.Interfaces.Services;

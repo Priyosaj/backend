@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Priyosaj.Api.DTOs;
+namespace Priyosaj.Contacts.DTOs;
 
 public class ChangeUserRole
 {

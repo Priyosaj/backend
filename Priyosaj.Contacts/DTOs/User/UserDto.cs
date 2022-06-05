@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.DTOs;
+namespace Priyosaj.Contacts.DTOs;
 
 public class UserDto
 {

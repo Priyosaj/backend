@@ -1,6 +1,7 @@
+using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
 using Priyosaj.Contacts.Entities.ProductEntities;
 
-namespace Priyosaj.Api.DTOs.ProductDTOs;
+namespace Priyosaj.Contacts.DTOs.ProductDTOs;
 
 public class ProductResponseDto
 {
@@ -9,5 +10,5 @@ public class ProductResponseDto
     public string Description { get; set; } = string.Empty;
     public decimal RegularPrice { get; set; }
 
-    public ICollection<ProductCategory> ProductCategories { get; set; } = null!;
+    public ICollection<ProductCategoryResponseDto> ProductCategories { get; set; } = null!;
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.DTOs;
+using Priyosaj.Contacts.DTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Entities.IdentityEntities;

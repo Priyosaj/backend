@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Helpers;
+namespace Priyosaj.Business.Helpers;
 
 public class PaginatedResponse<T> where T : class
 {

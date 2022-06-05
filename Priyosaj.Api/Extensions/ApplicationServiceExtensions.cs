@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Errors;
-using Priyosaj.Api.Helpers;
 using Priyosaj.Business.Data;
+using Priyosaj.Business.Helpers;
 using Priyosaj.Business.Services;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Interfaces.Services;
@@ -25,6 +25,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<ITokenService, TokenService>();
 

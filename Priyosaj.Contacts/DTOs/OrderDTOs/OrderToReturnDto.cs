@@ -1,6 +1,6 @@
 ﻿using Priyosaj.Contacts.Entities.OrderEntities;
 
-namespace Priyosaj.Api.DTOs.OrderDTOs;
+namespace Priyosaj.Contacts.DTOs.OrderDTOs;
 
 public class OrderToReturnDto
 {

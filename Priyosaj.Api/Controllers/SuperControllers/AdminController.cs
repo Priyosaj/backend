@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Api.DTOs;
+using Priyosaj.Contacts.DTOs;
 using Priyosaj.Contacts.Constants;
 using Priyosaj.Contacts.Entities.IdentityEntities;
 

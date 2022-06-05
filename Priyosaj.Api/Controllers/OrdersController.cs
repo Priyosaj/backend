@@ -1,7 +1,7 @@
 ﻿// using System.Security.Claims;
 // using AutoMapper;
 // using Microsoft.AspNetCore.Mvc;
-// using Priyosaj.Api.DTOs;
+// using Priyosaj.Contacts.DTOs;
 // using Priyosaj.Api.Errors;
 // using Priyosaj.Api.Extensions;
 // using Priyosaj.Contacts.Entities.Identity;

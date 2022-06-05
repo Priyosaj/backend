@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Priyosaj.Api.DTOs.AddressDTOs;
+namespace Priyosaj.Contacts.DTOs.AddressDTOs;
 
 public class AddressDto
 {

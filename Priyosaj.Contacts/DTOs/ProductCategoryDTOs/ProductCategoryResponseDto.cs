@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.DTOs.ProductCategoryDTOs;
+namespace Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
 
 public class ProductCategoryResponseDto
 {

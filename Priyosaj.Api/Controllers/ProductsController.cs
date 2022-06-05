@@ -7,6 +7,7 @@ using Priyosaj.Business.Data;
 using Priyosaj.Contacts.Entities.Product;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Specifications.ProductSpecifications;
+using Priyosaj.Contacts.Utils;
 
 namespace Priyosaj.Api.Controllers;
 
@@ -53,7 +54,7 @@ public class ProductsController : BaseApiController
 
         var product = await _productRepo.GetEntityWithSpec(spec);
 
-        if (product == null) return NotFound(new ApiResponse(404));
+        if (product == null) throw new NotFoundException("123");
 
         return Ok(_mapper.Map<Product, ProductResponseDto>(product));
     }

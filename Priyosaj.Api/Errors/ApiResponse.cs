@@ -6,8 +6,10 @@ public class ApiResponse
     {
         StatusCode = statusCode;
         Message = message ?? GetDefaultMessageForStatusCode(statusCode);
+        IsSuccess = statusCode.ToString().StartsWith("2");
     }
 
+    public bool IsSuccess { get; set; }
     public int StatusCode { get; set; }
     public string? Message { get; set; }
 

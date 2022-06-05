@@ -1,46 +1,32 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.DTOs.ProductDTOs;
+﻿using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.Errors;
-using Priyosaj.Api.Helpers;
-using Priyosaj.Business.Data;
+using Priyosaj.Business.Helpers;
+using Priyosaj.Contacts.DTOs.ProductDTOs;
 using Priyosaj.Contacts.Entities.ProductEntities;
-using Priyosaj.Contacts.Interfaces.Repositories;
+using Priyosaj.Contacts.Interfaces.Services;
 using Priyosaj.Contacts.Specifications.ProductSpecifications;
 
 namespace Priyosaj.Api.Controllers;
 
 public class ProductsController : BaseApiController
 {
-    private readonly ILogger<ProductsController> _logger;
-    private readonly IGenericRepository<Product> _productRepo;
-    private readonly IMapper _mapper;
-    private readonly StoreContext _context;
+    private ILogger<ProductsController> _logger;
+    private IProductService _productService;
 
-    public ProductsController(ILogger<ProductsController> logger, IGenericRepository<Product> productRepo,
-        IMapper mapper, StoreContext context)
+    public ProductsController(ILogger<ProductsController> logger, IProductService productService)
     {
         _logger = logger;
-        _productRepo = productRepo;
-        _mapper = mapper;
-        _context = context;
+        _productService = productService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedResponse<ProductResponseDto>>> GetProductsAsync(
-        [FromQuery] ProductSpecParams productParams)
+    public async Task<ActionResult<PaginatedResponse<ProductResponseDto>>> GetProductsAsync([FromQuery] ProductSpecParams productParams)
     {
-        var spec = new ProductDemoSpecification(productParams);
-        var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+        var totalItems = await _productService.CountProductsAsync(productParams);
 
-        var totalItems = await _productRepo.CountAsync(countSpec);
+        var data = await _productService.GetAllProductsAsync(productParams);
 
-        var products = await _productRepo.ListAllAsyncWithSpec(spec);
-
-        var data = _mapper.Map<IReadOnlyList<ProductResponseDto>>(products);
-
-        return Ok(new PaginatedResponse<ProductResponseDto>(productParams.PageIndex,
-            productParams.PageSize, totalItems, data));
+        return Ok(new PaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
     }
 
     [HttpGet("{id}")]
@@ -49,23 +35,16 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<Product>> GetProductAsync(Guid id)
     {
         _logger.LogInformation("Returning Product: " + id);
-        var spec = new ProductByIdSpecification(id);
 
-        var product = await _productRepo.GetEntityWithSpec(spec);
+        var product = await _productService.GetProductByIdAsync(id);
 
-        if (product == null) return NotFound(new ApiResponse(404));
-
-        return Ok(_mapper.Map<Product, ProductResponseDto>(product));
+        return Ok(product);
     }
 
     [HttpPost]
     public async Task<ActionResult> CreateProductAsync(ProductCreateDto product)
     {
-        _logger.LogInformation("Creating Product: ");
-
-        await _context.Products.AddAsync(_mapper.Map<ProductCreateDto, Product>(product));
-        await _context.SaveChangesAsync();
-
+        await _productService.CreateProductAsync(product);
         return NoContent();
     }
 }

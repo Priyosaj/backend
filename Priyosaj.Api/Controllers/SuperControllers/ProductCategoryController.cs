@@ -20,8 +20,7 @@ public class ProductCategoryController : BaseEditorSuperController
     [HttpPost]
     public async Task<ActionResult> CreateCategory([FromBody] ProductCategoryCreateDto category)
     {
-        var productCategory = _mapper.Map<ProductCategory>(category);
-        await _productCategoryService.CreateCategoryAsync(productCategory);
+        await _productCategoryService.CreateCategoryAsync(category);
         return NoContent();
     }
 
@@ -33,10 +32,9 @@ public class ProductCategoryController : BaseEditorSuperController
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateCategory([FromRoute]Guid id, [FromBody] ProductCategoryCreateDto category)
+    public async Task<ActionResult> UpdateCategory([FromRoute]Guid id, [FromBody] ProductCategoryUpdateDto category)
     {
-        var productCategory = _mapper.Map<ProductCategory>(category);
-        await _productCategoryService.UpdateCategoryAsync(id, productCategory);
+        await _productCategoryService.UpdateCategoryAsync(id, category);
         return NoContent();
     }
 }

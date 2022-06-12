@@ -30,8 +30,6 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet("{id}")]
-    // [ProducesResponseType(StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ProductResponseDto>> GetProductAsync(Guid id)
     {
         _logger.LogInformation("Returning Product: " + id);

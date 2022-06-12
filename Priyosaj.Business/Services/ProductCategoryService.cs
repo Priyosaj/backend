@@ -1,36 +1,45 @@
+using AutoMapper;
+using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
 using Priyosaj.Contacts.Entities.ProductEntities;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Interfaces.Services;
 using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
+using Priyosaj.Contacts.Utils;
 
 namespace Priyosaj.Business.Services;
 
 public class ProductCategoryService : IProductCategoryService
 {
-    private readonly IGenericRepository<ProductCategory> _productCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
-    public ProductCategoryService(IUnitOfWork unitOfWork, IGenericRepository<ProductCategory> productCategoryRepository)
+    private readonly IMapper _mapper;
+    public ProductCategoryService(IUnitOfWork unitOfWork, IMapper mapper)
     {
+        _mapper = mapper;
         _unitOfWork = unitOfWork;
-        _productCategoryRepository = productCategoryRepository;
     }
 
-    public async Task<IReadOnlyList<ProductCategory>> GetAllCategoriesAsync(ProductCategorySpecParams productCategorySpecParams)
+    public async Task<IReadOnlyList<ProductCategoryResponseDto>> GetAllCategoriesAsync(ProductCategorySpecParams productCategorySpecParams)
     {
         var spec = new ProductCategoryDemoSpecification(productCategorySpecParams);
-        var categories = await _productCategoryRepository.ListAllAsyncWithSpec(spec);
-        categories = categories.Where(c => c.ParentId == null).ToList();
-        return categories;
+        var categories = await _unitOfWork.Repository<ProductCategory>().ListAllAsyncWithSpec(spec);
+        var resCategories = _mapper.Map<IReadOnlyList<ProductCategoryResponseDto>>(categories);
+        return resCategories;
     }
 
-    public Task<ProductCategory> GetCategoryByIdAsync(Guid id)
+    public async Task<ProductCategoryResponseDto> GetCategoryByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var spec = new ProductCategoryByIdSpecification(id);
+
+        var category = await _unitOfWork.Repository<ProductCategory>().GetEntityWithSpec(spec);
+
+        if (category == null) throw new NotFoundException("ProductCategory not found");
+
+        return _mapper.Map<ProductCategoryResponseDto>(category);
     }
 
     public async Task DeleteCategoryAsync(Guid id)
     {
-        var category = await _productCategoryRepository.GetByIdAsync(id);
+        var category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
         if (category == null)
         {
             throw new Exception("Category not found");
@@ -38,16 +47,17 @@ public class ProductCategoryService : IProductCategoryService
         category.DeletedAt = DateTime.Now;
         _unitOfWork.Repository<ProductCategory>().Update(category);
         var result = await _unitOfWork.Complete();
-        if (result<=0)
+        if (result <= 0)
         {
             throw new Exception("Category not deleted");
         }
     }
 
-    public async Task UpdateCategoryAsync(Guid id, ProductCategory category)
+    public async Task UpdateCategoryAsync(Guid id, ProductCategoryUpdateDto category)
     {
-        var existingCategory = await _productCategoryRepository.GetByIdAsync(id);
-        if(existingCategory==null)
+        
+        var existingCategory = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
+        if (existingCategory == null)
         {
             throw new Exception("Category not found");
         }
@@ -61,14 +71,16 @@ public class ProductCategoryService : IProductCategoryService
         }
     }
 
-    public async Task CreateCategoryAsync(ProductCategory category)
+    public async Task CreateCategoryAsync(ProductCategoryCreateDto category)
     {
-        _unitOfWork.Repository<ProductCategory>().Add(category);
-        
-        var result = await _unitOfWork.Complete(); 
+        var newCategory = _mapper.Map<ProductCategory>(category);
+        _unitOfWork.Repository<ProductCategory>().Add(newCategory);
+
+        var result = await _unitOfWork.Complete();
         if (result <= 0)
         {
             throw new Exception("Category creation failed");
         }
     }
+
 }

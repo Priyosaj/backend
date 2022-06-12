@@ -9,20 +9,24 @@ namespace Priyosaj.Api.Controllers;
 public class ProductCategoryController : BaseApiController
 {
     private readonly IProductCategoryService _productCategoryService;
-    private readonly IMapper _mapper;
-    public ProductCategoryController(IProductCategoryService productCategoryService, IMapper mapper)
+    public ProductCategoryController(IProductCategoryService productCategoryService)
     {
         _productCategoryService = productCategoryService;
-        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProductCategoryResponseDto>>> GetCategories(
-        [FromQuery] ProductCategorySpecParams productCategoryParams
-        )
+    public async Task<ActionResult<IReadOnlyList<ProductCategoryResponseDto>>> GetCategories([FromQuery] ProductCategorySpecParams productCategoryParams)
     {
         var categories = await _productCategoryService.GetAllCategoriesAsync(productCategoryParams);
-        var resCategories = _mapper.Map<IReadOnlyList<ProductCategoryResponseDto>>(categories);
-        return Ok(resCategories);
+        return Ok(categories);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ProductCategoryResponseDto>> GetProductAsync(Guid id)
+    {
+        var category = await _productCategoryService.GetCategoryByIdAsync(id);
+
+        return Ok(category);
     }
 }
+

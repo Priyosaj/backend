@@ -4,6 +4,7 @@ using Priyosaj.Contacts.Entities.ProductEntities;
 using Priyosaj.Contacts.Interfaces.Repositories;
 using Priyosaj.Contacts.Interfaces.Services;
 using Priyosaj.Contacts.Specifications.ProductSpecifications;
+using Priyosaj.Contacts.Utils;
 
 namespace Priyosaj.Business.Services;
 
@@ -12,7 +13,7 @@ public class ProductService : IProductService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public ProductService(IUnitOfWork unitOfWork, IGenericRepository<Product> productRepository, IMapper mapper)
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -44,7 +45,7 @@ public class ProductService : IProductService
 
         var product = await _unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
 
-        if (product == null) throw new Exception("Product not found");
+        if(product == null) throw new NotFoundException("Product not found");
 
         return _mapper.Map<ProductResponseDto>(product);
     }
@@ -71,7 +72,6 @@ public class ProductService : IProductService
         }
         catch (System.NullReferenceException e)
         {
-            Console.WriteLine(e.Message);
             throw new Exception("Product Category not found");
         }
 

@@ -55,7 +55,6 @@ public class ProductCategoryService : IProductCategoryService
 
     public async Task UpdateCategoryAsync(Guid id, ProductCategoryUpdateDto category)
     {
-        
         var existingCategory = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
         if (existingCategory == null)
         {

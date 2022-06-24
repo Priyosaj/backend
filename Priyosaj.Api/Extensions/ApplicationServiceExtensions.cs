@@ -28,6 +28,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IEmailService, EmailService>();
 
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();

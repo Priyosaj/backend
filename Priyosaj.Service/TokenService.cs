@@ -28,6 +28,7 @@ public class TokenService : ITokenService
         {
             new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.GivenName, user.UserName),
+            new("userId", user.Id)
         };
 
         var roles = await _userManager.GetRolesAsync(user);

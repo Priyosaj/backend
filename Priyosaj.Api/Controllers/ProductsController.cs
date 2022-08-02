@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.Errors;
-using Priyosaj.Business.Helpers;
-using Priyosaj.Contacts.DTOs.ProductDTOs;
-using Priyosaj.Contacts.Entities.ProductEntities;
-using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications.ProductSpecifications;
+using Priyosaj.Core.DTOs.ProductDTOs;
+using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Specifications.ProductSpecifications;
+using Priyosaj.Service.Helpers;
 
 namespace Priyosaj.Api.Controllers;
 
 public class ProductsController : BaseApiController
 {
-    private ILogger<ProductsController> _logger;
-    private IProductService _productService;
+    private readonly ILogger<ProductsController> _logger;
+    private readonly IProductService _productService;
 
     public ProductsController(ILogger<ProductsController> logger, IProductService productService)
     {

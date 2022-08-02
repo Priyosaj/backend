@@ -113,7 +113,7 @@
 //                     b.ToTable("AspNetUserTokens", (string)null);
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.Address", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.Address", b =>
 //                 {
 //                     b.Property<Guid>("Id")
 //                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@
 //                     b.ToTable("Address");
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppRole", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppRole", b =>
 //                 {
 //                     b.Property<string>("Id")
 //                         .HasColumnType("text");
@@ -182,7 +182,7 @@
 //                     b.ToTable("AspNetRoles", (string)null);
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppUser", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppUser", b =>
 //                 {
 //                     b.Property<string>("Id")
 //                         .HasColumnType("text");
@@ -246,7 +246,7 @@
 //                     b.ToTable("AspNetUsers", (string)null);
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppUserRole", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppUserRole", b =>
 //                 {
 //                     b.Property<string>("UserId")
 //                         .HasColumnType("text");
@@ -263,7 +263,7 @@
 //
 //             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppRole", null)
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppRole", null)
 //                         .WithMany()
 //                         .HasForeignKey("RoleId")
 //                         .OnDelete(DeleteBehavior.Cascade)
@@ -272,7 +272,7 @@
 //
 //             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", null)
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppUser", null)
 //                         .WithMany()
 //                         .HasForeignKey("UserId")
 //                         .OnDelete(DeleteBehavior.Cascade)
@@ -281,7 +281,7 @@
 //
 //             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", null)
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppUser", null)
 //                         .WithMany()
 //                         .HasForeignKey("UserId")
 //                         .OnDelete(DeleteBehavior.Cascade)
@@ -290,16 +290,16 @@
 //
 //             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", null)
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppUser", null)
 //                         .WithMany()
 //                         .HasForeignKey("UserId")
 //                         .OnDelete(DeleteBehavior.Cascade)
 //                         .IsRequired();
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.Address", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.Address", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", "AppUser")
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppUser", "AppUser")
 //                         .WithMany("Addresses")
 //                         .HasForeignKey("AppUserId")
 //                         .OnDelete(DeleteBehavior.Cascade)
@@ -308,15 +308,15 @@
 //                     b.Navigation("AppUser");
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppUserRole", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppUserRole", b =>
 //                 {
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppRole", "Role")
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppRole", "Role")
 //                         .WithMany("UserRoles")
 //                         .HasForeignKey("RoleId")
 //                         .OnDelete(DeleteBehavior.Cascade)
 //                         .IsRequired();
 //
-//                     b.HasOne("Priyosaj.Contacts.Models.Identity.AppUser", "User")
+//                     b.HasOne("Priyosaj.Core.Models.Identity.AppUser", "User")
 //                         .WithMany("UserRoles")
 //                         .HasForeignKey("UserId")
 //                         .OnDelete(DeleteBehavior.Cascade)
@@ -327,12 +327,12 @@
 //                     b.Navigation("User");
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppRole", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppRole", b =>
 //                 {
 //                     b.Navigation("UserRoles");
 //                 });
 //
-//             modelBuilder.Entity("Priyosaj.Contacts.Models.Identity.AppUser", b =>
+//             modelBuilder.Entity("Priyosaj.Core.Models.Identity.AppUser", b =>
 //                 {
 //                     b.Navigation("Addresses");
 //

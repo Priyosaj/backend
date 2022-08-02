@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.DTOs.EmailDTOs;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.DTOs.EmailDTOs;
+using Priyosaj.Core.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 

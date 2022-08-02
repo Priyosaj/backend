@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Api.Errors;
 using Priyosaj.Business.Data;
-using Priyosaj.Contacts.Constants;
+using Priyosaj.Core.Constants;
+using Priyosaj.Data;
 
 namespace Priyosaj.Api.Controllers;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Priyosaj.Contacts.Entities.OrderEntities;
+using Priyosaj.Core.Entities.OrderEntities;
 
 namespace Priyosaj.Business.Data.Config;
 

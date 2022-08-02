@@ -1,10 +1,10 @@
 using AutoMapper;
-using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
-using Priyosaj.Contacts.Entities.ProductEntities;
-using Priyosaj.Contacts.Interfaces.Repositories;
-using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
-using Priyosaj.Contacts.Utils;
+using Priyosaj.Core.DTOs.ProductCategoryDTOs;
+using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.Interfaces.Repositories;
+using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Specifications.ProductCategorySpecifications;
+using Priyosaj.Core.Utils;
 
 namespace Priyosaj.Business.Services;
 

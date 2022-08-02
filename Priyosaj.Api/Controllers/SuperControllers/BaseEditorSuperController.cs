@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.Constants;
+using Priyosaj.Core.Constants;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 

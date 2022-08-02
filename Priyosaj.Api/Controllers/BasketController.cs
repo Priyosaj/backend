@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.Entities.BasketEntities;
-using Priyosaj.Contacts.Interfaces.Repositories;
+using Priyosaj.Core.Entities.BasketEntities;
+using Priyosaj.Core.Interfaces.Repositories;
 
 namespace Priyosaj.Api.Controllers;
 

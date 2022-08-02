@@ -1,8 +1,8 @@
-﻿using Priyosaj.Contacts.Entities.IdentityEntities;
-using Priyosaj.Contacts.Entities.OrderEntities;
-using Priyosaj.Contacts.Interfaces.Repositories;
-using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications.OrderSpecifications;
+﻿using Priyosaj.Core.Entities.IdentityEntities;
+using Priyosaj.Core.Entities.OrderEntities;
+using Priyosaj.Core.Interfaces.Repositories;
+using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Specifications.OrderSpecifications;
 
 namespace Priyosaj.Business.Services;
 

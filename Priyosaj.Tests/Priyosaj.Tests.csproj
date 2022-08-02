@@ -24,7 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Priyosaj.Api\Priyosaj.Api.csproj" />
     <ProjectReference Include="..\Priyosaj.Business\Priyosaj.Business.csproj" />
-    <ProjectReference Include="..\Priyosaj.Contacts\Priyosaj.Contacts.csproj" />
+    <ProjectReference Include="..\Priyosaj.Core\Priyosaj.Core.csproj" />
   </ItemGroup>
 
 </Project>

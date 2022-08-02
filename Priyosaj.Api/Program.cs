@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Extensions;
 using Priyosaj.Api.Middlewares;
-using Priyosaj.Business.Data;
-using Priyosaj.Business.Data.Seed;
-using Priyosaj.Contacts.Entities.IdentityEntities;
+using Priyosaj.Core.Entities.IdentityEntities;
+using Priyosaj.Data;
+using Priyosaj.Data.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 

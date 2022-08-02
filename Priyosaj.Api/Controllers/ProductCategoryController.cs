@@ -1,8 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
-using Priyosaj.Contacts.Interfaces.Services;
-using Priyosaj.Contacts.Specifications.ProductCategorySpecifications;
+using Priyosaj.Core.DTOs.ProductCategoryDTOs;
+using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Specifications.ProductCategorySpecifications;
 
 namespace Priyosaj.Api.Controllers;
 

@@ -115,7 +115,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.Address", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +161,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppRole", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -187,7 +187,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppUser", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -251,7 +251,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppUserRole", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppUserRole", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -266,7 +266,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.DeliveryMethod", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.DeliveryMethod", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -301,7 +301,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("DeliveryMethods");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.Order", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,7 +339,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.OrderedItem", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.OrderedItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -378,7 +378,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("OrderedItems");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Product.Product", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Product.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -412,7 +412,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Product.ProductCategory", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Product.ProductCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -461,7 +461,7 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppRole", null)
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -470,7 +470,7 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", null)
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -479,7 +479,7 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", null)
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -488,16 +488,16 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", null)
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.Address", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.Address", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", "AppUser")
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", "AppUser")
                         .WithMany("Addresses")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -506,15 +506,15 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppUserRole", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppUserRole", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppRole", "Role")
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppRole", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", "User")
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -525,21 +525,21 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.Order", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.Order", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Identity.AppUser", "AppUser")
+                    b.HasOne("Priyosaj.Core.Entities.Identity.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Priyosaj.Contacts.Entities.Order.DeliveryMethod", "DeliveryMethod")
+                    b.HasOne("Priyosaj.Core.Entities.Order.DeliveryMethod", "DeliveryMethod")
                         .WithMany()
                         .HasForeignKey("DeliveryMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Priyosaj.Contacts.Entities.Order.ShippingAddress", "ShippingAddress", b1 =>
+                    b.OwnsOne("Priyosaj.Core.Entities.Order.ShippingAddress", "ShippingAddress", b1 =>
                         {
                             b1.Property<Guid>("OrderId")
                                 .HasColumnType("uuid");
@@ -584,9 +584,9 @@ namespace Priyosaj.Business.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.OrderedItem", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.OrderedItem", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Order.Order", "Order")
+                    b.HasOne("Priyosaj.Core.Entities.Order.Order", "Order")
                         .WithMany("OrderedItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -595,9 +595,9 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Product.ProductCategory", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Product.ProductCategory", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Product.ProductCategory", "Parent")
+                    b.HasOne("Priyosaj.Core.Entities.Product.ProductCategory", "Parent")
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentId");
 
@@ -606,37 +606,37 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("ProductProductCategory", b =>
                 {
-                    b.HasOne("Priyosaj.Contacts.Entities.Product.ProductCategory", null)
+                    b.HasOne("Priyosaj.Core.Entities.Product.ProductCategory", null)
                         .WithMany()
                         .HasForeignKey("ProductCategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Priyosaj.Contacts.Entities.Product.Product", null)
+                    b.HasOne("Priyosaj.Core.Entities.Product.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppRole", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppRole", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Identity.AppUser", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Identity.AppUser", b =>
                 {
                     b.Navigation("Addresses");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Order.Order", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Order.Order", b =>
                 {
                     b.Navigation("OrderedItems");
                 });
 
-            modelBuilder.Entity("Priyosaj.Contacts.Entities.Product.ProductCategory", b =>
+            modelBuilder.Entity("Priyosaj.Core.Entities.Product.ProductCategory", b =>
                 {
                     b.Navigation("SubCategories");
                 });

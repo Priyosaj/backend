@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.DTOs.ProductDTOs;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.DTOs.ProductDTOs;
+using Priyosaj.Core.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 public class ProductsController : BaseEditorSuperController

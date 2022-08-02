@@ -1,7 +1,7 @@
 // using Microsoft.AspNetCore.Identity;
 // using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 // using Microsoft.EntityFrameworkCore;
-// using Priyosaj.Contacts.Models.Identity;
+// using Priyosaj.Core.Models.Identity;
 //
 // namespace Priyosaj.Business.Identity;
 //

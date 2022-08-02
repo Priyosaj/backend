@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using Priyosaj.Contacts.Entities;
-using Priyosaj.Contacts.Interfaces.Repositories;
+using Priyosaj.Core.Entities;
+using Priyosaj.Core.Interfaces.Repositories;
 
 namespace Priyosaj.Business.Data;
 
@@ -23,7 +23,7 @@ public class UnitOfWork : IUnitOfWork
         _context.Dispose();
     }
 
-    public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseRepositoryItem
+    public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : ABaseEntity
     {
         if (_repositories == null) _repositories = new Hashtable();
 

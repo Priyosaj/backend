@@ -7,9 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Api", "Priyosaj.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Business", "Priyosaj.Business\Priyosaj.Business.csproj", "{DF45D383-67F2-4F8E-8C9A-6B1E34F84C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Contacts", "Priyosaj.Contacts\Priyosaj.Contacts.csproj", "{4635D70B-6932-4343-8D73-ED89371AF8F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Core", "Priyosaj.Core\Priyosaj.Core.csproj", "{4635D70B-6932-4343-8D73-ED89371AF8F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Tests", "Priyosaj.Tests\Priyosaj.Tests.csproj", "{D16CAE86-100E-4660-96BC-80BB7E347363}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Data", "Priyosaj.Data\Priyosaj.Data.csproj", "{5FAE47CD-F1A1-4C59-B5C0-749EFEAE1F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priyosaj.Service", "Priyosaj.Service\Priyosaj.Service.csproj", "{54A810C3-AE8F-4EDD-B5E6-EE2A2C08FAF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +40,13 @@ Global
 		{D16CAE86-100E-4660-96BC-80BB7E347363}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16CAE86-100E-4660-96BC-80BB7E347363}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16CAE86-100E-4660-96BC-80BB7E347363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FAE47CD-F1A1-4C59-B5C0-749EFEAE1F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FAE47CD-F1A1-4C59-B5C0-749EFEAE1F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FAE47CD-F1A1-4C59-B5C0-749EFEAE1F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FAE47CD-F1A1-4C59-B5C0-749EFEAE1F38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A810C3-AE8F-4EDD-B5E6-EE2A2C08FAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A810C3-AE8F-4EDD-B5E6-EE2A2C08FAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A810C3-AE8F-4EDD-B5E6-EE2A2C08FAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A810C3-AE8F-4EDD-B5E6-EE2A2C08FAF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

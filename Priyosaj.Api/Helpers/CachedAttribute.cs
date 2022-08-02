@@ -1,7 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.Interfaces.Services;
 
 namespace Priyosaj.Api.Helpers
 {

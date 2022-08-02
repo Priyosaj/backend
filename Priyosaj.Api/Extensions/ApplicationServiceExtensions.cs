@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Api.Errors;
-using Priyosaj.Business.Data;
-using Priyosaj.Business.Helpers;
-using Priyosaj.Business.Services;
-using Priyosaj.Contacts.Interfaces.Repositories;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.Interfaces.Repositories;
+using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Data;
+using Priyosaj.Service;
 using StackExchange.Redis;
 
 namespace Priyosaj.Api.Extensions;
@@ -24,7 +23,9 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        // services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<ITokenService, TokenService>();
@@ -32,11 +33,6 @@ public static class ApplicationServiceExtensions
 
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
-
-        // services.AddDbContextPool<StoreContext>(options =>
-        // {
-        //     options.UseSqlite(config.GetConnectionString("DBConnectionString"));
-        // });
 
         services.AddDbContextPool<StoreContext>(options =>
         {

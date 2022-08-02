@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.DTOs;
-using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Entities.IdentityEntities;
+using Priyosaj.Core.DTOs;
+using Priyosaj.Core.Constants;
+using Priyosaj.Core.DTOs.User;
+using Priyosaj.Core.Entities.IdentityEntities;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 

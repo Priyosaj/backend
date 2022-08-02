@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Priyosaj.Business\Priyosaj.Business.csproj" />
-    <ProjectReference Include="..\Priyosaj.Contacts\Priyosaj.Contacts.csproj" />
+    <ProjectReference Include="..\Priyosaj.Service\Priyosaj.Service.csproj" />
   </ItemGroup>
 
 </Project>

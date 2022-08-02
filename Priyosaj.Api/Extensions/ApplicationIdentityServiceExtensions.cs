@@ -1,11 +1,10 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Priyosaj.Business.Data;
-using Priyosaj.Contacts.Constants;
-using Priyosaj.Contacts.Entities.IdentityEntities;
+using Priyosaj.Core.Constants;
+using Priyosaj.Core.Entities.IdentityEntities;
+using Priyosaj.Data;
 
 namespace Priyosaj.Api.Extensions;
 

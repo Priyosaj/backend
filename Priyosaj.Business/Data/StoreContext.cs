@@ -2,10 +2,10 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Entities.IdentityEntities;
-using Priyosaj.Contacts.Entities.OrderEntities;
-using Priyosaj.Contacts.Entities.ProductEntities;
-using Priyosaj.Contacts.Entities.PromotionalEventEntities;
+using Priyosaj.Core.Entities.IdentityEntities;
+using Priyosaj.Core.Entities.OrderEntities;
+using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.Entities.PromotionalEventEntities;
 
 namespace Priyosaj.Business.Data;
 

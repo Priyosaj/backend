@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Entities;
-using Priyosaj.Contacts.Interfaces.Repositories;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Core.Entities;
+using Priyosaj.Core.Interfaces.Repositories;
+using Priyosaj.Core.Specifications;
 
 namespace Priyosaj.Business.Data;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseRepositoryItem
+public class GenericRepository<T> : IGenericRepository<T> where T : ABaseEntity
 {
     private readonly StoreContext _context;
 

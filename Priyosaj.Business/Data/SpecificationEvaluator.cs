@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Contacts.Entities;
-using Priyosaj.Contacts.Interfaces;
-using Priyosaj.Contacts.Specifications;
+using Priyosaj.Core.Entities;
+using Priyosaj.Core.Interfaces;
+using Priyosaj.Core.Specifications;
 
 namespace Priyosaj.Business.Data;
 
-public static class SpecificationEvaluator<TEntity> where TEntity : BaseRepositoryItem
+public static class SpecificationEvaluator<TEntity> where TEntity : ABaseEntity
 {
     public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> spec)
     {

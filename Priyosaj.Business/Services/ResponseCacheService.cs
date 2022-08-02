@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.Interfaces.Services;
 using StackExchange.Redis;
 
 namespace Priyosaj.Business.Services;

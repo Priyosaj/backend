@@ -1,11 +1,11 @@
 ﻿// using System.Security.Claims;
 // using AutoMapper;
 // using Microsoft.AspNetCore.Mvc;
-// using Priyosaj.Contacts.DTOs;
+// using Priyosaj.Core.DTOs;
 // using Priyosaj.Api.Errors;
 // using Priyosaj.Api.Extensions;
-// using Priyosaj.Contacts.Entities.Identity;
-// using Priyosaj.Contacts.Entities.Order;
+// using Priyosaj.Core.Entities.Identity;
+// using Priyosaj.Core.Entities.Order;
 //
 // namespace Priyosaj.Api.Controllers;
 //
@@ -63,3 +63,12 @@
 //         return Ok(await _orderService.GetDeliveryMethodsAsync());
 //     }
 // }
+
+
+/*
+ 1. GetBasket by userId
+ 2. Loop through the products of the basket and load them from db.
+ 3. Check if all constrains are okay.
+ 4. Save Order to db.
+  
+ */

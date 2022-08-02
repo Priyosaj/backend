@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Contacts.DTOs.ProductCategoryDTOs;
-using Priyosaj.Contacts.Interfaces.Services;
+using Priyosaj.Core.DTOs.ProductCategoryDTOs;
+using Priyosaj.Core.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 public class ProductCategoryController : BaseEditorSuperController

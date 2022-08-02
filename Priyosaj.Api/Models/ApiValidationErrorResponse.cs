@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Errors;
+namespace Priyosaj.Api.Models;
 
 public class ApiValidationErrorResponse : ApiResponse
 {

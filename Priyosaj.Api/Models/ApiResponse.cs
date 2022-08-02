@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Errors;
+namespace Priyosaj.Api.Models;
 
 public class ApiResponse
 {
@@ -26,4 +26,14 @@ public class ApiResponse
             _ => null
         };
     }
+}
+
+public class ApiDataResponse<TRes> : ApiResponse
+{
+    public ApiDataResponse(TRes data, int statusCode, string? message = null) : base(statusCode, message)
+    {
+        Data = data;
+    }
+    
+    public TRes Data { get; set; }
 }

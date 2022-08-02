@@ -1,8 +1,8 @@
-namespace Priyosaj.Service.Helpers;
+namespace Priyosaj.Api.Models;
 
-public class PaginatedResponse<T> where T : class
+public class ApiPaginatedResponse<T>: ApiResponse where T : class
 {
-    public PaginatedResponse(int pageIndex, int pageSize, int count, IReadOnlyList<T> data)
+    public ApiPaginatedResponse(int pageIndex, int pageSize, int count, IReadOnlyList<T> data) : base(200, "Paginated Data Retrieved.")
     {
         PageIndex = pageIndex;
         PageSize = pageSize;

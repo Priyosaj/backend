@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.Errors;
+using Priyosaj.Api.Models;
 using Priyosaj.Core.Constants;
 using Priyosaj.Data;
 

@@ -13,7 +13,7 @@ public class ProductCreateReqDto : IMapFrom<Product>
 
     [Required] public Decimal Price { get; set; }
 
-    public ICollection<Guid>? ProductCategoriesId { get; set; } = null;
+    public ICollection<Guid> ProductCategoriesId { get; set; } = new List<Guid>();
 
     public void Mapping(Profile profile)
     {

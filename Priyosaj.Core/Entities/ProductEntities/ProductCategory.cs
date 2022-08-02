@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +7,6 @@ namespace Priyosaj.Core.Entities.ProductEntities;
 [Index(nameof(Title), IsUnique = true)]
 public class ProductCategory : ABaseEntity
 {
-    // public Guid Id { get; set; }
     public string Title { get; set; }
     public Guid? ParentId { get; set; }
     [JsonIgnore]

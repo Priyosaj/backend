@@ -1,8 +1,8 @@
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
-using Priyosaj.Core.DTOs.EmailDTOs;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Utils;
+using Priyosaj.Service.DTOs.EmailDTOs;
 
 namespace Priyosaj.Business.Services;
 public class EmailService : IEmailService

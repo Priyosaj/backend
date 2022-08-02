@@ -1,9 +1,10 @@
-using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
+using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.MapperProfile;
 
 namespace Priyosaj.Core.DTOs.ProductDTOs;
 
-public class ProductResponseDto
+public class ProductResponseDto : IMapFrom<Product>
 {
     public string Id { get; set; }
     public string Title { get; set; } = string.Empty;

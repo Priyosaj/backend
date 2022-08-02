@@ -1,6 +1,4 @@
-﻿using Priyosaj.Core.Interfaces.Repositories;
-
-namespace Priyosaj.Core.Entities;
+﻿namespace Priyosaj.Core.Entities;
 
 public abstract class ABaseEntity
 {

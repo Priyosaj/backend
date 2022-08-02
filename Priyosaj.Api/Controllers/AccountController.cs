@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Core.DTOs;
 using Priyosaj.Api.Errors;
 using Priyosaj.Core.Constants;
 using Priyosaj.Core.DTOs.User;

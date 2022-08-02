@@ -1,4 +1,3 @@
-using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
 using Priyosaj.Core.Specifications.ProductCategorySpecifications;
 

@@ -3,6 +3,7 @@ using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Interfaces.Services;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
+
 public class ProductsController : BaseEditorSuperController
 {
     private ILogger<ProductsController> _logger;
@@ -15,7 +16,7 @@ public class ProductsController : BaseEditorSuperController
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateProductAsync(ProductCreateDto product)
+    public async Task<ActionResult> CreateProductAsync(ProductCreateReqDto product)
     {
         await _productService.CreateProductAsync(product);
         return NoContent();

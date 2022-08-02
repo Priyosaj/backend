@@ -5,6 +5,7 @@ using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Specifications.ProductCategorySpecifications;
 using Priyosaj.Core.Utils;
+using Priyosaj.Service.DTOs.ProductCategoryDTOs;
 
 namespace Priyosaj.Business.Services;
 

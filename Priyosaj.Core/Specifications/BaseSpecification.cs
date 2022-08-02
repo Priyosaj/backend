@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Query;
-using Priyosaj.Core.Interfaces;
 
 namespace Priyosaj.Core.Specifications;
 

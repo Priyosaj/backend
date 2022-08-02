@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Priyosaj.Core.Entities.ProductEntities;
-using Priyosaj.Service.Helpers;
-using Priyosaj.Service.Helpers.MapperProfile;
+using Priyosaj.Core.MapperProfile;
 
-namespace Priyosaj.Service.DTOs.ProductDTOs;
+namespace Priyosaj.Core.DTOs.ProductDTOs;
 
 public class ProductCreateReqDto : IMapFrom<Product>
 {

@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
 using Priyosaj.Core.Interfaces.Services;

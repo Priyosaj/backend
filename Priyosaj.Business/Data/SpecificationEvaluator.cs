@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Priyosaj.Core.Entities;
-using Priyosaj.Core.Interfaces;
 using Priyosaj.Core.Specifications;
 
 namespace Priyosaj.Business.Data;

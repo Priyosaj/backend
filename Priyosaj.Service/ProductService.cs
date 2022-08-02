@@ -50,7 +50,7 @@ public class ProductService : IProductService
         return _mapper.Map<ProductResponseDto>(product);
     }
 
-    public async Task CreateProductAsync(ProductCreateDto productDto)
+    public async Task CreateProductAsync(ProductCreateReqDto productDto)
     {
         var product = _mapper.Map<Product>(productDto);
 

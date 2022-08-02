@@ -1,14 +1,14 @@
 using System.Reflection;
 using AutoMapper;
 
-namespace Priyosaj.Service.Helpers.MapperProfile;
+namespace Priyosaj.Core.MapperProfile;
 
 public class MappingProfile : Profile
 {
     public MappingProfile()
     {
         var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-            .Where(a => a.FullName.ToLower().Contains("evv"))
+            .Where(a => a.FullName != null && a.FullName.ToLower().Contains("priyosaj"))
             .ToList();
         ApplyMappingsFromAssembly(assemblies);
     }

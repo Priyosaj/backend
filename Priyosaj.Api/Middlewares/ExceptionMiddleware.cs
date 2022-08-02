@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text.Json;
 using Priyosaj.Api.Errors;
 using Priyosaj.Core.Utils;

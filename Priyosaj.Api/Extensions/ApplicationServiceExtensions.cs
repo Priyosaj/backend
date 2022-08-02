@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Priyosaj.Api.Errors;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Priyosaj.Api.Models;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Data;
@@ -30,6 +31,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
 
         // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         // services.AddScoped<IPhotoService, PhotoService>();
@@ -38,6 +40,8 @@ public static class ApplicationServiceExtensions
         {
             options.UseNpgsql(config.GetConnectionString("PostgresConnection"));
         });
+        
+        // services.AddHttpContextAccessor();
 
         services.Configure<ApiBehaviorOptions>(options =>
         {

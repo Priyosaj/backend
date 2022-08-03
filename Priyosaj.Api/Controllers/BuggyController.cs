@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.Models;
 using Priyosaj.Core.Constants;
+using Priyosaj.Core.Models;
 using Priyosaj.Data;
 
 namespace Priyosaj.Api.Controllers;
@@ -30,7 +30,7 @@ public class BuggyController : BaseApiController
     [Authorize(Policy = UserRolePoliciesConstants.RequireAdminRole)]
     public ActionResult GetAdminSecretStuff()
     {
-        return Ok("Super Secret Stuff for Admin");
+        throw new UnauthorizedAccessException("Super Secret Stuff for Admin");
     }
 
     [HttpGet("test-editor-auth")]

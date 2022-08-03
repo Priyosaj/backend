@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Priyosaj.Api.Models;
+using Priyosaj.Core.Models;
 using Priyosaj.Core.Utils;
 
 namespace Priyosaj.Api.Middlewares;

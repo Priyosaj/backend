@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Models;
+namespace Priyosaj.Core.Models;
 
 public class ApiPaginatedResponse<T>: ApiResponse where T : class
 {
@@ -8,6 +8,7 @@ public class ApiPaginatedResponse<T>: ApiResponse where T : class
         PageSize = pageSize;
         Count = count;
         Data = data;
+        IsPaginated = true;
     }
 
     public int PageIndex { get; set; }

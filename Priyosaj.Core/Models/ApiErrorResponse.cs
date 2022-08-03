@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Models;
+namespace Priyosaj.Core.Models;
 
 public class ApiErrorResponse : ApiResponse
 {

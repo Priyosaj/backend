@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.Models;
+using Priyosaj.Core.Models;
 
 namespace Priyosaj.Api.Controllers;
 

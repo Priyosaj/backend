@@ -9,7 +9,6 @@ using Priyosaj.Core.Entities.IdentityEntities;
 namespace Priyosaj.Api.Controllers.SuperControllers;
 
 [Authorize(Policy = UserRolePoliciesConstants.RequireAdminRole)]
-
 [ApiController]
 [Route("api-super/[controller]")]
 public class AdminController : ControllerBase

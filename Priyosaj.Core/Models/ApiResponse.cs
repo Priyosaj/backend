@@ -1,4 +1,4 @@
-namespace Priyosaj.Api.Models;
+namespace Priyosaj.Core.Models;
 
 public class ApiResponse
 {
@@ -12,6 +12,8 @@ public class ApiResponse
     public bool IsSuccess { get; set; }
     public int StatusCode { get; set; }
     public string? Message { get; set; }
+    
+    public bool IsPaginated { get; set; }
 
     private string? GetDefaultMessageForStatusCode(int statusCode)
     {

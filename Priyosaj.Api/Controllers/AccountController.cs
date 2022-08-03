@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Priyosaj.Api.Models;
 using Priyosaj.Core.Constants;
 using Priyosaj.Core.DTOs.User;
 using Priyosaj.Core.Entities.IdentityEntities;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Models;
 
 namespace Priyosaj.Api.Controllers;
 

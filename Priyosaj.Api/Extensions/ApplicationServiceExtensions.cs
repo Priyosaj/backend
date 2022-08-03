@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Priyosaj.Api.Models;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Models;
 using Priyosaj.Data;
 using Priyosaj.Service;
 using StackExchange.Redis;

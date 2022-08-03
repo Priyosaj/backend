@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Models;
 using Priyosaj.Core.Specifications.ProductSpecifications;
 
 namespace Priyosaj.Api.Controllers;
@@ -17,13 +18,13 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<Models.ApiPaginatedResponse<ProductResponseDto>>> GetProductsAsync([FromQuery] ProductSpecParams productParams)
+    public async Task<ActionResult<ApiPaginatedResponse<ProductResponseDto>>> GetProductsAsync([FromQuery] ProductSpecParams productParams)
     {
         var totalItems = await _productService.CountProductsAsync(productParams);
 
         var data = await _productService.GetAllProductsAsync(productParams);
 
-        return Ok(new Models.ApiPaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        return Ok(new ApiPaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
     }
 
     [HttpGet("{id}")]

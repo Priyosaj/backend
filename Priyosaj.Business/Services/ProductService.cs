@@ -1,10 +1,10 @@
 using AutoMapper;
+using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Specifications.ProductSpecifications;
 using Priyosaj.Core.Utils;
-using Priyosaj.Service.DTOs.ProductDTOs;
 
 namespace Priyosaj.Business.Services;
 
@@ -50,7 +50,7 @@ public class ProductService : IProductService
         return _mapper.Map<ProductResponseDto>(product);
     }
 
-    public async Task CreateProductAsync(ProductCreateDto productDto)
+    public async Task CreateProductAsync(ProductCreateReqDto productDto)
     {
         var product = _mapper.Map<Product>(productDto);
 

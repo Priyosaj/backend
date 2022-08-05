@@ -10,6 +10,6 @@ public class Address : ABaseEntity
     public string City { get; set; } = string.Empty;
     public string ZipCode { get; set; } = string.Empty;
 
-    public string AppUserId { get; set; }
-    public AppUser AppUser { get; set; }
+    public Guid AppUserId { get; set; }
+    public AppUser Customer { get; set; } = null!;
 }

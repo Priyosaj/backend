@@ -1,4 +1,5 @@
-﻿using Priyosaj.Core.Entities.IdentityEntities;
+﻿using System.ComponentModel.DataAnnotations;
+using Priyosaj.Core.Entities.IdentityEntities;
 
 namespace Priyosaj.Core.Entities.OrderEntities;
 
@@ -6,8 +7,8 @@ public class Order : ABaseEntity
 {
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
-    public string AppUserId { get; set; } = null!;
-    public AppUser AppUser { get; set; } = null!;
+    public Guid AppUserId { get; set; }
+    public AppUser Customer { get; set; } = null!;
 
     public DeliveryMethod DeliveryMethod { get; set; } = null!;
     public ShippingAddress ShippingAddress { get; set; } = null!;

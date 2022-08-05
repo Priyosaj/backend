@@ -7,7 +7,7 @@ public class Order : ABaseEntity
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
     public Guid AppUserId { get; set; }
-    public AppUser Customer { get; set; } = null!;
+    public AppUser AppUser { get; set; }
 
     public DeliveryMethod DeliveryMethod { get; set; } = null!;
     public ShippingAddress ShippingAddress { get; set; } = null!;

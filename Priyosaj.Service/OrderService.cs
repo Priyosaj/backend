@@ -13,10 +13,10 @@ public class OrderService : IOrderService
 {
     private readonly IBasketRepository _basketRepo;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly Mapper _mapper;
+    private readonly IMapper _mapper;
     private readonly ICurrentUserService _currentUserService;
 
-    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, Mapper mapper,
+    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, IMapper mapper,
         ICurrentUserService currentUserService)
     {
         _unitOfWork = unitOfWork;
@@ -64,9 +64,9 @@ public class OrderService : IOrderService
     {
         _currentUserService.ValidateIfCustomer();
         var userId = _currentUserService.UserId;
-        
+
         var order = _mapper.Map<Order>(orderReq);
-        
+
         var basket = await _basketRepo.GetUserBasketAsync(userId);
 
         if (basket == null || basket.Items.Count == 0)
@@ -83,15 +83,16 @@ public class OrderService : IOrderService
             if (product == null)
             {
                 basket.Items = basket.Items.Where(i => i.ProductId != item.ProductId).ToList();
-                throw new BadRequestException("Non Existent Product Added to Basket. Product Has Been Removed From the Basket. Please Try Again!");
+                throw new BadRequestException(
+                    "Non Existent Product Added to Basket. Product Has Been Removed From the Basket. Please Try Again!");
             }
-            
+
             if (product.StockCount <= 0 || item.Quantity > product.StockCount)
             {
                 await _basketRepo.DeleteUserBasketAsync(userId);
                 throw new BadRequestException($"Sorry! {product.Title} is Out Of Stock!");
             }
-            
+
             var orderedItem = new OrderedItem
             {
                 ProductTitle = product.Title,
@@ -102,8 +103,9 @@ public class OrderService : IOrderService
             };
             order.OrderedItems.Add(orderedItem);
         }
+
         _unitOfWork.Repository<Order>().Add(order);
-        
+
         var isSuccess = (await _unitOfWork.Complete()) != 0;
 
         if (!isSuccess)
@@ -118,7 +120,7 @@ public class OrderService : IOrderService
     {
         var customerId = _currentUserService.UserId;
         var spec = new OrderFetchByCustomerIdSpecification(customerId);
-        
+
         var orders = await _unitOfWork.Repository<Order>().ListAllAsyncWithSpec(spec);
 
         return _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);

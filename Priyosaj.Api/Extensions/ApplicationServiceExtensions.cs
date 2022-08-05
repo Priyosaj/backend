@@ -5,6 +5,7 @@ using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Models;
 using Priyosaj.Data;
 using Priyosaj.Service;
+using Priyosaj.Service.Interfaces;
 using StackExchange.Redis;
 
 namespace Priyosaj.Api.Extensions;
@@ -28,6 +29,7 @@ public static class ApplicationServiceExtensions
 
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductCategoryService, ProductCategoryService>();
+        services.AddScoped<IFileUploadService, FileUploadService>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();

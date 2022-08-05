@@ -2,7 +2,7 @@
 using Priyosaj.Core.Entities.OrderEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
-using Priyosaj.Core.Specifications.OrderSpecifications;
+using Priyosaj.Data.Specifications.OrderSpecifications;
 
 namespace Priyosaj.Business.Services;
 

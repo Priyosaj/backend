@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Priyosaj.Core\Priyosaj.Core.csproj" />
+    <ProjectReference Include="..\Priyosaj.Data\Priyosaj.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

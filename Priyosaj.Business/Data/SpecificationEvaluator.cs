@@ -1,5 +1,5 @@
 using Priyosaj.Core.Entities;
-using Priyosaj.Core.Specifications;
+using Priyosaj.Core.Interfaces;
 
 namespace Priyosaj.Business.Data;
 

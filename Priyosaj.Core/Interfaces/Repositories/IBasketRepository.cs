@@ -4,7 +4,7 @@ namespace Priyosaj.Core.Interfaces.Repositories;
 
 public interface IBasketRepository
 {
-    Task<CustomerBasket?> GetBasketAsync(Guid basketId);
-    Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket basket);
-    Task<bool> DeleteBasketAsync(Guid basketId);
+    Task<CustomerBasket?> GetUserBasketAsync(Guid userId);
+    Task<CustomerBasket?> UpdateUserBasketAsync(CustomerBasket basket);
+    Task<bool> DeleteUserBasketAsync(Guid basketId);
 }

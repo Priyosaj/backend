@@ -1,6 +1,8 @@
 using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.Interfaces;
+using Priyosaj.Core.Params;
 
-namespace Priyosaj.Core.Specifications.ProductSpecifications;
+namespace Priyosaj.Data.Specifications.ProductSpecifications;
 
 public class ProductsWithFiltersForCountSpecification : ABaseSpecification<Product>
 {

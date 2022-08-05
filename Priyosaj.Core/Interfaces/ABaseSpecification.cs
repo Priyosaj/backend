@@ -2,15 +2,15 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Priyosaj.Core.Specifications;
+namespace Priyosaj.Core.Interfaces;
 
 public abstract class ABaseSpecification<T> : ISpecification<T>
 {
-    public ABaseSpecification()
+    protected ABaseSpecification()
     {
     }
 
-    public ABaseSpecification(Expression<Func<T, bool>>? criteria)
+    protected ABaseSpecification(Expression<Func<T, bool>>? criteria)
     {
         Criteria = criteria;
     }

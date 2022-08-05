@@ -1,4 +1,4 @@
-namespace Priyosaj.Core.Specifications.ProductCategorySpecifications;
+namespace Priyosaj.Data.Specifications.ProductCategorySpecifications;
 
 public class ProductCategorySpecParamsSuper
 {

@@ -1,5 +1,4 @@
 using Priyosaj.Core.Entities;
-using Priyosaj.Core.Specifications;
 
 namespace Priyosaj.Core.Interfaces.Repositories;
 

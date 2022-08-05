@@ -4,8 +4,9 @@ using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
-using Priyosaj.Core.Specifications.ProductSpecifications;
+using Priyosaj.Core.Params;
 using Priyosaj.Core.Utils;
+using Priyosaj.Data.Specifications.ProductSpecifications;
 
 namespace Priyosaj.Service;
 
@@ -24,7 +25,7 @@ public class ProductService : IProductService
 
     public async Task<IReadOnlyList<ProductResponseDto>> GetAllProductsAsync(ProductSpecParams productParams)
     {
-        var spec = new ProductDemoSpecification(productParams);
+        var spec = new ProductFetchSpecification(productParams);
 
         var products = await _unitOfWork.Repository<Product>().ListAllAsyncWithSpec(spec);
 

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
 using Priyosaj.Core.Interfaces.Services;
-using Priyosaj.Core.Specifications.ProductCategorySpecifications;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Api.Controllers;
 

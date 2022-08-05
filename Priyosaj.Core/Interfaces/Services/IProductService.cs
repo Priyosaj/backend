@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
-using Priyosaj.Core.Specifications.ProductSpecifications;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Core.Interfaces.Services;
 

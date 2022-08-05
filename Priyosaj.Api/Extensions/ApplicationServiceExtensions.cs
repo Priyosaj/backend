@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Models;
-using Priyosaj.Core.Utils;
 using Priyosaj.Data;
 using Priyosaj.Service;
 using StackExchange.Redis;

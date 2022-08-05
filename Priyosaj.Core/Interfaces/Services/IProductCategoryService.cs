@@ -1,5 +1,5 @@
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
-using Priyosaj.Core.Specifications.ProductCategorySpecifications;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Core.Interfaces.Services;
 

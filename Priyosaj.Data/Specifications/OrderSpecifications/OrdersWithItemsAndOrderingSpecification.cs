@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Priyosaj.Core.Entities.OrderEntities;
+using Priyosaj.Core.Interfaces;
 
-namespace Priyosaj.Core.Specifications.OrderSpecifications;
+namespace Priyosaj.Data.Specifications.OrderSpecifications;
 
 public class OrdersWithItemsAndOrderingSpecification : ABaseSpecification<Order>
 {

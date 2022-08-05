@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Priyosaj.Core.Specifications;
+namespace Priyosaj.Core.Interfaces;
 
 public interface ISpecification<T>
 {

@@ -3,8 +3,9 @@ using Priyosaj.Core.DTOs.ProductCategoryDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
-using Priyosaj.Core.Specifications.ProductCategorySpecifications;
+using Priyosaj.Core.Params;
 using Priyosaj.Core.Utils;
+using Priyosaj.Data.Specifications.ProductCategorySpecifications;
 
 namespace Priyosaj.Service;
 

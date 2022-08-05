@@ -1,16 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.Interfaces;
+using Priyosaj.Core.Params;
 
-namespace Priyosaj.Core.Specifications.ProductSpecifications;
+namespace Priyosaj.Data.Specifications.ProductSpecifications;
 
-public class ProductDemoSpecification : ABaseSpecification<Product>
+public class ProductFetchSpecification : ABaseSpecification<Product>
 {
-    public ProductDemoSpecification()
+    public ProductFetchSpecification()
     {
         AddInclude(x => x.Include(p => p.ProductCategories));
     }
 
-    public ProductDemoSpecification(ProductSpecParams productParams) : base(x =>
+    public ProductFetchSpecification(ProductSpecParams productParams) : base(x =>
             (string.IsNullOrEmpty(productParams.Search) || x.Title.ToLower().Contains(productParams.Search))
             && (!productParams.CategoryId.HasValue || x.ProductCategories.Any(x => x.Id == productParams.CategoryId))
         // && (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)

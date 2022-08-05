@@ -2,7 +2,7 @@
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Models;
-using Priyosaj.Core.Specifications.ProductSpecifications;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Api.Controllers;
 

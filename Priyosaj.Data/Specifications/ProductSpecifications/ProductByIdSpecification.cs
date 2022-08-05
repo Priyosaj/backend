@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Priyosaj.Core.Entities.ProductEntities;
+using Priyosaj.Core.Interfaces;
 
-namespace Priyosaj.Core.Specifications.ProductSpecifications;
+namespace Priyosaj.Data.Specifications.ProductSpecifications;
 
 public class ProductByIdSpecification : ABaseSpecification<Product>
 {

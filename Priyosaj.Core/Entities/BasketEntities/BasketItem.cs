@@ -4,5 +4,5 @@ public class BasketItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public int Quantity { get; set; }
-    public string PictureUrl { get; set; }
+    public string PictureUrl { get; set; } = string.Empty;
 }

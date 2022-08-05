@@ -5,10 +5,14 @@ namespace Priyosaj.Core.Entities.ProductEntities;
 public class Product : ABaseEntity
 {
     public string Title { get; set; } = string.Empty;
+    
+    // public ICollection<>
 
     public string Description { get; set; } = string.Empty;
     public decimal RegularPrice { get; set; }
     public decimal? DiscountPrice { get; set; }
+    
+    public int StockCount { get; set; }
 
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 

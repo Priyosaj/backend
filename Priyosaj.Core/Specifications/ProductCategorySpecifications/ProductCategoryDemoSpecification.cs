@@ -3,7 +3,7 @@ using Priyosaj.Core.Entities.ProductEntities;
 
 namespace Priyosaj.Core.Specifications.ProductCategorySpecifications;
 
-public class ProductCategoryDemoSpecification : BaseSpecification<ProductCategory>
+public class ProductCategoryDemoSpecification : ABaseSpecification<ProductCategory>
 {
     public ProductCategoryDemoSpecification() : base(x => x.DeletedAt == null)
     {

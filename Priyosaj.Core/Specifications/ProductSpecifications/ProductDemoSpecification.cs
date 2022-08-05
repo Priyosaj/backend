@@ -3,7 +3,7 @@ using Priyosaj.Core.Entities.ProductEntities;
 
 namespace Priyosaj.Core.Specifications.ProductSpecifications;
 
-public class ProductDemoSpecification : BaseSpecification<Product>
+public class ProductDemoSpecification : ABaseSpecification<Product>
 {
     public ProductDemoSpecification()
     {

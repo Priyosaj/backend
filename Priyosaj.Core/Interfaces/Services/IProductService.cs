@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Specifications.ProductSpecifications;
@@ -12,4 +13,5 @@ public interface IProductService
     Task CreateProductAsync(ProductCreateReqDto product);
     Task UpdateProductAsync(Guid id, Product product);
     Task DeleteProductAsync(Guid id);
+    Task UploadImages(string productId, IFormFileCollection images, string webRootPath);
 }

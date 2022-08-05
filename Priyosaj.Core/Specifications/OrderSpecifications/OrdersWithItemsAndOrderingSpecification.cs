@@ -3,7 +3,7 @@ using Priyosaj.Core.Entities.OrderEntities;
 
 namespace Priyosaj.Core.Specifications.OrderSpecifications;
 
-public class OrdersWithItemsAndOrderingSpecification : BaseSpecification<Order>
+public class OrdersWithItemsAndOrderingSpecification : ABaseSpecification<Order>
 {
     public OrdersWithItemsAndOrderingSpecification(string email) 
         // : base(o => o.BuyerEmail == email)

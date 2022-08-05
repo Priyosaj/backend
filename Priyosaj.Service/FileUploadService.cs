@@ -1,33 +1,30 @@
 using System.Net;
 using Microsoft.AspNetCore.Http;
-using Priyosaj.Service.Interfaces;
+using Priyosaj.Core.Interfaces.Services;
 
-namespace Priyosaj.Service
+namespace Priyosaj.Service;
+
+public class FileUploadService: IFileUploadService
 {
-    public class FileUploadService: IFileUploadService
+    public async Task<List<string>> UploadFiles(string path, IFormFileCollection files)
     {
-        
-
-        public async Task<List<string>> UploadFiles(string path, IFormFileCollection files)
-        {
-            List<string> filePaths = new List<string>();
-            try{
-                foreach (var file in files)
-                {
-                    var fileName = Path.Combine(path, file.FileName);
-                    using (var fileStream = System.IO.File.Create(fileName))
-                    {
-                        await file.CopyToAsync(fileStream);
-                        fileStream.Flush();
-                    }
-                    filePaths.Add(fileName.Split("wwwroot")[1]);
-                }
-                return filePaths;
-            }
-            catch(Exception ex)
+        List<string> filePaths = new List<string>();
+        try{
+            foreach (var file in files)
             {
-                return null;
+                var fileName = Path.Combine(path, file.FileName);
+                await using (var fileStream = File.Create(fileName))
+                {
+                    await file.CopyToAsync(fileStream);
+                    fileStream.Flush();
+                }
+                filePaths.Add(fileName.Split("wwwroot")[1]);
             }
+            return filePaths;
+        }
+        catch(Exception ex)
+        {
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
@@ -12,11 +13,13 @@ public class ProductService : IProductService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IFileUploadService _fileUploadService;
 
-    public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _fileUploadService = fileUploadService;
     }
 
     public async Task<IReadOnlyList<ProductResponseDto>> GetAllProductsAsync(ProductSpecParams productParams)
@@ -68,6 +71,7 @@ public class ProductService : IProductService
                     product.ProductCategories.Add(category);
                 }
             }
+            
             _unitOfWork.Repository<Product>().Add(product);
         }
         catch (System.NullReferenceException e)
@@ -90,5 +94,10 @@ public class ProductService : IProductService
     public Task UpdateProductAsync(Guid id, Product product)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task UploadImages(string productId, IFormFileCollection images, string webRootPath)
+    {
+        // var fileEntities = await _fileUploadService.UploadFiles("", images);
     }
 }

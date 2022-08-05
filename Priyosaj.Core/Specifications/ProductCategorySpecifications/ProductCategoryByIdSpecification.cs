@@ -3,7 +3,7 @@ using Priyosaj.Core.Entities.ProductEntities;
 
 namespace Priyosaj.Core.Specifications.ProductCategorySpecifications;
 
-public class ProductCategoryByIdSpecification: BaseSpecification<ProductCategory>
+public class ProductCategoryByIdSpecification: ABaseSpecification<ProductCategory>
 {
     public ProductCategoryByIdSpecification(Guid id) 
         : base(x => 

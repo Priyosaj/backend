@@ -3,59 +3,58 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Priyosaj.Core.Interfaces.Services;
 
-namespace Priyosaj.Api.Helpers
+namespace Priyosaj.Api.Helpers;
+
+public class CachedAttribute : Attribute, IAsyncActionFilter
 {
-    public class CachedAttribute : Attribute, IAsyncActionFilter
+    private readonly int _timeToLiveSeconds;
+
+    public CachedAttribute(int timeToLiveSeconds)
     {
-        private readonly int _timeToLiveSeconds;
+        _timeToLiveSeconds = timeToLiveSeconds;
+    }
 
-        public CachedAttribute(int timeToLiveSeconds)
+    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+    {
+        var cacheService = context.HttpContext.RequestServices.GetRequiredService<IResponseCacheService>();
+
+        var cacheKey = GenerateCacheKeyFromRequest(context.HttpContext.Request);
+        var cachedResponse = await cacheService.GetCachedResponse(cacheKey);
+
+        if (!string.IsNullOrEmpty(cachedResponse))
         {
-            _timeToLiveSeconds = timeToLiveSeconds;
+            var contentResult = new ContentResult
+            {
+                Content = cachedResponse,
+                ContentType = "application/json",
+                StatusCode = 200
+            };
+
+            context.Result = contentResult;
+
+            return;
         }
 
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        var executedContext = await next(); // move to controller
+
+        if (executedContext.Result is OkObjectResult okObjectResult)
         {
-            var cacheService = context.HttpContext.RequestServices.GetRequiredService<IResponseCacheService>();
+            await cacheService.CacheResponseAsync(cacheKey, okObjectResult.Value,
+                TimeSpan.FromSeconds(_timeToLiveSeconds));
+        }
+    }
 
-            var cacheKey = GenerateCacheKeyFromRequest(context.HttpContext.Request);
-            var cachedResponse = await cacheService.GetCachedResponse(cacheKey);
+    private string GenerateCacheKeyFromRequest(HttpRequest request)
+    {
+        var keyBuilder = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(cachedResponse))
-            {
-                var contentResult = new ContentResult
-                {
-                    Content = cachedResponse,
-                    ContentType = "application/json",
-                    StatusCode = 200
-                };
+        keyBuilder.Append($"{request.Path}");
 
-                context.Result = contentResult;
-
-                return;
-            }
-
-            var executedContext = await next(); // move to controller
-
-            if (executedContext.Result is OkObjectResult okObjectResult)
-            {
-                await cacheService.CacheResponseAsync(cacheKey, okObjectResult.Value,
-                    TimeSpan.FromSeconds(_timeToLiveSeconds));
-            }
+        foreach (var (key, value) in request.Query.OrderBy(x => x.Key))
+        {
+            keyBuilder.Append($"|{key}-{value}");
         }
 
-        private string GenerateCacheKeyFromRequest(HttpRequest request)
-        {
-            var keyBuilder = new StringBuilder();
-
-            keyBuilder.Append($"{request.Path}");
-
-            foreach (var (key, value) in request.Query.OrderBy(x => x.Key))
-            {
-                keyBuilder.Append($"|{key}-{value}");
-            }
-
-            return keyBuilder.ToString();
-        }
+        return keyBuilder.ToString();
     }
 }

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Priyosaj.Core.Specifications;
 
-public class BaseSpecification<T> : ISpecification<T>
+public abstract class ABaseSpecification<T> : ISpecification<T>
 {
-    public BaseSpecification()
+    public ABaseSpecification()
     {
     }
 
-    public BaseSpecification(Expression<Func<T, bool>>? criteria)
+    public ABaseSpecification(Expression<Func<T, bool>>? criteria)
     {
         Criteria = criteria;
     }

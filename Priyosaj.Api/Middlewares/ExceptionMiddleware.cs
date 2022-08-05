@@ -25,6 +25,7 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             _logger.LogError(ex, ex.Message);
             context.Response.ContentType = "application/json";
             var statusCode = ex is ABaseException e ? e.StatusCode : 500;

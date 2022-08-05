@@ -20,6 +20,14 @@ public class NotFoundException : ABaseException
     }
 }
 
+public class BadRequestException : ABaseException
+{
+    public BadRequestException(string? message = null) : base((int)HttpStatusCode.BadRequest,
+        message ?? "Bad Request")
+    {
+    }
+}
+
 public class UnAuthorizedException : ABaseException
 {
     public UnAuthorizedException(string? message = null) : base((int)HttpStatusCode.Unauthorized,

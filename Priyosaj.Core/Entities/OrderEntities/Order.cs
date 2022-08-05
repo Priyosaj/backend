@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Priyosaj.Core.Entities.IdentityEntities;
+﻿using Priyosaj.Core.Entities.IdentityEntities;
 
 namespace Priyosaj.Core.Entities.OrderEntities;
 

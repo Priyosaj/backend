@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Priyosaj.Core.Entities.IdentityEntities;
+using Priyosaj.Core.MapperProfile;
 
 namespace Priyosaj.Core.DTOs.AddressDTOs;
 
-public class AddressDto
+public class AddressDto : IMapFrom<Address>
 {
     [Required]
     public string FirstName { get; set; } = string.Empty;

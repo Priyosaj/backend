@@ -9,19 +9,19 @@ using Priyosaj.Core.Entities.PromotionalEventEntities;
 
 namespace Priyosaj.Data;
 
-public class StoreContext :  IdentityDbContext<AppUser, AppRole, string,
-    IdentityUserClaim<string>, AppUserRole, IdentityUserLogin<string>,
-    IdentityRoleClaim<string>, IdentityUserToken<string>>
+public class StoreContext : IdentityDbContext<AppUser, AppRole, Guid,
+    IdentityUserClaim<Guid>, AppUserRole, IdentityUserLogin<Guid>,
+    IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
 {
     public StoreContext(DbContextOptions<StoreContext> options) : base(options)
     {
     }
-    
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        
+
         builder.Entity<AppUser>()
             .HasMany(ur => ur.UserRoles)
             .WithOne(u => u.User)
@@ -35,14 +35,15 @@ public class StoreContext :  IdentityDbContext<AppUser, AppRole, string,
             .IsRequired();
 
         builder.Entity<PromotionalEventProductMapping>()
-            .HasKey(nameof(PromotionalEventProductMapping.PromotionalEventId), nameof(PromotionalEventProductMapping.ProductId));
+            .HasKey(nameof(PromotionalEventProductMapping.PromotionalEventId),
+                nameof(PromotionalEventProductMapping.ProductId));
     }
 
-    public DbSet<Product> Products { get; set; }
-    public DbSet<ProductCategory> ProductCategories { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderedItem> OrderedItems { get; set; }
-    public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
-    public DbSet<PromotionalEvent> PromotionalEvents { get; set; }
-    public DbSet<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; }
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<ProductCategory> ProductCategories { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<OrderedItem> OrderedItems { get; set; } = null!;
+    public DbSet<DeliveryMethod> DeliveryMethods { get; set; } = null!;
+    public DbSet<PromotionalEvent> PromotionalEvents { get; set; } = null!;
+    public DbSet<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; } = null!;
 }

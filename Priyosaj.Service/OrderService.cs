@@ -83,6 +83,7 @@ public class OrderService : IOrderService
             if (product == null)
             {
                 basket.Items = basket.Items.Where(i => i.ProductId != item.ProductId).ToList();
+                await _basketRepo.UpdateUserBasketAsync(basket);
                 throw new BadRequestException(
                     "Non Existent Product Added to Basket. Product Has Been Removed From the Basket. Please Try Again!");
             }

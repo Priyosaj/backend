@@ -54,7 +54,7 @@ public class ProductCategoryService : IProductCategoryService
         }
     }
 
-    public async Task UpdateCategoryAsync(Guid id, ProductCategoryUpdateDto category)
+    public async Task<ProductCategoryResponseDto> UpdateCategoryAsync(Guid id, ProductCategoryUpdateDto category)
     {
         var existingCategory = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
         if (existingCategory == null)
@@ -69,9 +69,11 @@ public class ProductCategoryService : IProductCategoryService
         {
             throw new Exception("Category not updated");
         }
+
+        return _mapper.Map<ProductCategoryResponseDto>(existingCategory);
     }
 
-    public async Task CreateCategoryAsync(ProductCategoryCreateDto category)
+    public async Task<ProductCategoryResponseDto> CreateCategoryAsync(ProductCategoryCreateDto category)
     {
         var newCategory = _mapper.Map<ProductCategory>(category);
         _unitOfWork.Repository<ProductCategory>().Add(newCategory);
@@ -81,6 +83,8 @@ public class ProductCategoryService : IProductCategoryService
         {
             throw new Exception("Category creation failed");
         }
+
+        return _mapper.Map<ProductCategoryResponseDto>(newCategory);
     }
 
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Interfaces.Services;
 using Priyosaj.Core.Models;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 
@@ -18,12 +19,21 @@ public class ProductsController : BaseEditorSuperController
         _env = env;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<ProductResponseDto>>> GetProductsAsync([FromBody] ProductSpecParams productParams)
+    {
+        var products = await _productService.GetAllProductsAsync(productParams);
+        return Ok(products);
+    }
+
     [HttpPost]
     public async Task<ActionResult> CreateProductAsync(ProductCreateReqDto product)
     {
         await _productService.CreateProductAsync(product);
         return NoContent();
     }
+
+    
 
     [HttpPatch("{productId}")]
     public async Task<ActionResult> UploadImages([FromQuery] string productId, [FromBody] IFormFileCollection images)

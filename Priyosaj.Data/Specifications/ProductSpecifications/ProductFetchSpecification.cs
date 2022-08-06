@@ -12,15 +12,32 @@ public class ProductFetchSpecification : ABaseSpecification<Product>
         AddInclude(x => x.Include(p => p.ProductCategories));
     }
 
-    public ProductFetchSpecification(ProductSpecParams productParams) : base(x =>
-            (string.IsNullOrEmpty(productParams.Search) || x.Title.ToLower().Contains(productParams.Search))
-            && (!productParams.CategoryId.HasValue || x.ProductCategories.Any(x => x.Id == productParams.CategoryId))
-        // && (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
+    public ProductFetchSpecification(ProductSpecParams productParams)
+        : base(x => 
+            (string.IsNullOrEmpty(productParams.Search) || 
+            x.Title.ToLower().Contains(productParams.Search))
+            && 
+            (!productParams.CategoryId.HasValue || 
+            x.ProductCategories.Any(x => x.Id == productParams.CategoryId)
+            && 
+            (((productParams.Type == TypeCandidate.Active) && x.DeletedAt == null) || 
+            (productParams.Type == TypeCandidate.Trash && x.DeletedAt != null) || 
+            (productParams.Type == TypeCandidate.All)))
     )
     {
         AddInclude(x => x.Include(p => p.ProductCategories));
+        // AddInclude(x => x.Include(p => p.Creator));
 
         ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
+
+        if (!string.IsNullOrEmpty(productParams.Sort))
+        {
+            ApplySorting(productParams.Sort);
+        }
+        else
+        {
+            AddOrderByDescending(x => x.Title);
+        }
 
         /* if (!string.IsNullOrEmpty(productParams.Sort))
         {
@@ -41,13 +58,5 @@ public class ProductFetchSpecification : ABaseSpecification<Product>
         {
             AddOrderByDescending(x => x.Title);
         } */
-        if (!string.IsNullOrEmpty(productParams.Sort))
-        {
-            ApplySorting(productParams.Sort);
-        }
-        else
-        {
-            AddOrderByDescending(x => x.Title);
-        }
     }
 }

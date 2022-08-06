@@ -387,6 +387,12 @@ namespace Priyosaj.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatorId1")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -411,6 +417,8 @@ namespace Priyosaj.Data.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatorId1");
 
                     b.ToTable("Products");
                 });
@@ -647,15 +655,16 @@ namespace Priyosaj.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Priyosaj.Core.Entities.ProductEntities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Order");
+                });
 
-                    b.Navigation("Product");
+            modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.Product", b =>
+                {
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId1");
+
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.ProductCategory", b =>

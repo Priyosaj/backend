@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Priyosaj.Core.DTOs.ProductDTOs;
+using Priyosaj.Core.Entities.IdentityEntities;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
@@ -15,9 +17,11 @@ public class ProductService : IProductService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IFileUploadService _fileUploadService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService)
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService, ICurrentUserService currentUserService, UserManager<AppUser> userManager)
     {
+        _currentUserService = currentUserService;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _fileUploadService = fileUploadService;
@@ -49,7 +53,7 @@ public class ProductService : IProductService
 
         var product = await _unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
 
-        if(product == null) throw new NotFoundException("Product not found");
+        if (product == null) throw new NotFoundException("Product not found");
 
         return _mapper.Map<ProductResponseDto>(product);
     }
@@ -57,6 +61,9 @@ public class ProductService : IProductService
     public async Task CreateProductAsync(ProductCreateReqDto productDto)
     {
         var product = _mapper.Map<Product>(productDto);
+        // product.Creator = await _unitOfWork.Repository<AppUser>().GetByIdAsync(_currentUserService.UserId.Value);
+
+        var user = _currentUserService.UserId;
 
         product.ProductCategories = new List<ProductCategory>();
         try
@@ -72,7 +79,7 @@ public class ProductService : IProductService
                     product.ProductCategories.Add(category);
                 }
             }
-            
+
             _unitOfWork.Repository<Product>().Add(product);
         }
         catch (System.NullReferenceException e)

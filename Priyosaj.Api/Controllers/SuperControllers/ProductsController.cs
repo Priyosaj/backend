@@ -30,7 +30,7 @@ public class ProductsController : BaseEditorSuperController
     public async Task<ActionResult> CreateProductAsync(ProductCreateReqDto product)
     {
         await _productService.CreateProductAsync(product);
-        return NoContent();
+        return StatusCode(204, new ApiResponse(201, "Product Creation Successful!"));
     }
 
     

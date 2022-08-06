@@ -61,9 +61,9 @@ public class ProductService : IProductService
     public async Task CreateProductAsync(ProductCreateReqDto productDto)
     {
         var product = _mapper.Map<Product>(productDto);
-        // product.Creator = await _unitOfWork.Repository<AppUser>().GetByIdAsync(_currentUserService.UserId.Value);
+        // var user = _currentUserService.UserId;
+        product.CreatedById = _currentUserService.UserId;
 
-        var user = _currentUserService.UserId;
 
         product.ProductCategories = new List<ProductCategory>();
         try

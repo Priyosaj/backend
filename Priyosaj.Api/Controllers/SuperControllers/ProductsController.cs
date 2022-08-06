@@ -26,7 +26,17 @@ public class ProductsController : BaseEditorSuperController
 
         var data = await _productService.GetAllProductsAsync(productParams);
 
-        return Ok(new ApiPaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        return StatusCode(200, new ApiPaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> GetProductAsync(Guid id)
+    {
+        _logger.LogInformation("Returning Product: " + id);
+
+        var product = await _productService.GetProductByIdAsync(id);
+
+        return StatusCode(200, new ApiDataResponse<ProductResponseDto>(product, 200, "Successful!"));
     }
 
     [HttpPost]
@@ -45,7 +55,14 @@ public class ProductsController : BaseEditorSuperController
         return StatusCode(201, new ApiDataResponse<ProductResponseDto>(product, 201, "Image Upload Successful!"));
     }
 
+    [HttpDelete("{productId}")]
+    public async Task<ActionResult<ApiResponse>> DeleteProductAsync([FromRoute]Guid productId)
+    {
+        // Console.WriteLine
+        await _productService.DeleteProductAsync(productId);
+        return StatusCode(201, new ApiResponse(204, "Product Deletion Successful!"));
+    }
 
-    /*Product Update, Delete*/
+    /*Product Update*/
     
 }

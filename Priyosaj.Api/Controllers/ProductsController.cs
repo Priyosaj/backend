@@ -28,12 +28,12 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductResponseDto>> GetProductAsync(Guid id)
+    public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> GetProductAsync(Guid id)
     {
         _logger.LogInformation("Returning Product: " + id);
 
         var product = await _productService.GetProductByIdAsync(id);
 
-        return Ok(product);
+        return StatusCode(200, new ApiDataResponse<ProductResponseDto>(product, 200, "Successful!"));
     }
 }

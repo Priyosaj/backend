@@ -96,9 +96,13 @@ public class ProductService : IProductService
         return _mapper.Map<ProductResponseDto>(product);
     }
 
-    public Task DeleteProductAsync(Guid id)
+    public async Task DeleteProductAsync(Guid id)
     {
-        throw new NotImplementedException();
+        _currentUserService.ValidateIfEditor();
+        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
+        if (product == null) throw new NotFoundException("Product not found");
+        product.DeletedAt = DateTime.Now;
+        await _unitOfWork.Complete();
     }
 
     public Task UpdateProductAsync(Guid id, Product product)
@@ -108,6 +112,7 @@ public class ProductService : IProductService
 
     public async Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images)
     {
+        _currentUserService.ValidateIfEditor();
         // Console.WriteLine(webRootPath);
         var files = await _fileUploadService.UploadFiles("Product", webRootPath, images);
         var product = await _unitOfWork.Repository<Product>().GetByIdAsync(Guid.Parse(productId));

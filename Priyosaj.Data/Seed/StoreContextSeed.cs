@@ -12,7 +12,7 @@ public class StoreContextSeed
         {
             if(!context.ProductCategories.Any())
             {
-                var categoriesData = File.ReadAllText("../Priyosaj.Business/Data/Seed/SeedData/ProductCategories.json");
+                var categoriesData = File.ReadAllText("../Priyosaj.Data/Seed/SeedData/ProductCategories.json");
                 var categories = JsonSerializer.Deserialize<List<ProductCategory>>(categoriesData);
                 foreach(var category in categories)
                 {

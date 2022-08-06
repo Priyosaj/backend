@@ -14,10 +14,8 @@ public class Product : ABaseEntity
     public decimal RegularPrice { get; set; }
     public decimal? DiscountPrice { get; set; }
     public int StockCount { get; set; }
-    public Guid AppUserId { get; set; }
-    public AppUser AppUser { get; set; }
-
-
+    public Guid CreatedById { get; set; }
+    public AppUser CreatedBy { get; set; }
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
     public ICollection<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; } =

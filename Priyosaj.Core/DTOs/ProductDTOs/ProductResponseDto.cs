@@ -11,7 +11,6 @@ public class ProductResponseDto : IMapFrom<Product>
     public string Description { get; set; } = string.Empty;
     public decimal RegularPrice { get; set; }
     public decimal? DiscountPrice { get; set; }
-    public int StockCount { get; set; }
-
+    public int? StockCount { get; set; }
     public ICollection<ProductCategoryResponseDto> ProductCategories { get; set; } = null!;
 }

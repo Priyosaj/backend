@@ -387,11 +387,8 @@ namespace Priyosaj.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("CreatorId")
+                    b.Property<Guid>("CreatedById")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("CreatorId1")
-                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp without time zone");
@@ -418,7 +415,7 @@ namespace Priyosaj.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId1");
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("Products");
                 });
@@ -655,16 +652,26 @@ namespace Priyosaj.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Priyosaj.Core.Entities.ProductEntities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.Product", b =>
                 {
-                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "AppUser")
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("AppUserId1");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Creator");
+                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.ProductCategory", b =>

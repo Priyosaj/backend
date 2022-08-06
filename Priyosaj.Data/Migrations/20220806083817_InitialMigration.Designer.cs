@@ -5,15 +5,20 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Priyosaj.Business.Data;
+using Priyosaj.Data;
 
 #nullable disable
 
-namespace Priyosaj.Business.Data.Migrations
+namespace Priyosaj.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220605154837_UpdateProductEntity")]
-    partial class UpdateProductEntity
+<<<<<<<< HEAD:Priyosaj.Data/Migrations/20220806080415_Initial.Designer.cs
+    [Migration("20220806080415_Initial")]
+    partial class Initial
+========
+    [Migration("20220806083817_InitialMigration")]
+    partial class InitialMigration
+>>>>>>>> origin/main:Priyosaj.Data/Migrations/20220806083817_InitialMigration.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +29,7 @@ namespace Priyosaj.Business.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,9 +43,8 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -49,7 +53,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,9 +67,8 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -74,7 +77,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -85,9 +88,8 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -96,10 +98,10 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -121,9 +123,8 @@ namespace Priyosaj.Business.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -163,8 +164,9 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.AppRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -189,8 +191,9 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.AppUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
@@ -253,11 +256,11 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.AppUserRole", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -307,9 +310,8 @@ namespace Priyosaj.Business.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -361,6 +363,9 @@ namespace Priyosaj.Business.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ProductTitle")
                         .IsRequired()
                         .HasColumnType("text");
@@ -375,6 +380,8 @@ namespace Priyosaj.Business.Data.Migrations
 
                     b.HasIndex("OrderId");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("OrderedItems");
                 });
 
@@ -386,6 +393,9 @@ namespace Priyosaj.Business.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp without time zone");
@@ -403,11 +413,16 @@ namespace Priyosaj.Business.Data.Migrations
                     b.Property<decimal>("RegularPrice")
                         .HasColumnType("numeric");
 
+                    b.Property<int>("StockCount")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("Products");
                 });
@@ -511,7 +526,7 @@ namespace Priyosaj.Business.Data.Migrations
                     b.ToTable("ProductProductCategory");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppRole", null)
                         .WithMany()
@@ -520,7 +535,7 @@ namespace Priyosaj.Business.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", null)
                         .WithMany()
@@ -529,7 +544,7 @@ namespace Priyosaj.Business.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", null)
                         .WithMany()
@@ -538,7 +553,7 @@ namespace Priyosaj.Business.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", null)
                         .WithMany()
@@ -549,13 +564,13 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.Address", b =>
                 {
-                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "AppUser")
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "Customer")
                         .WithMany("Addresses")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.AppUserRole", b =>
@@ -579,8 +594,8 @@ namespace Priyosaj.Business.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.OrderEntities.Order", b =>
                 {
-                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "AppUser")
-                        .WithMany()
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "Customer")
+                        .WithMany("Orders")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -628,7 +643,7 @@ namespace Priyosaj.Business.Data.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Customer");
 
                     b.Navigation("DeliveryMethod");
 
@@ -644,7 +659,26 @@ namespace Priyosaj.Business.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Priyosaj.Core.Entities.ProductEntities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.Product", b =>
+                {
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.ProductEntities.ProductCategory", b =>
@@ -698,6 +732,8 @@ namespace Priyosaj.Business.Data.Migrations
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.AppUser", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("UserRoles");
                 });

@@ -99,10 +99,13 @@ public class OrderService : IOrderService
                 Quantity = item.Quantity,
                 PictureUrl = null,
                 Product = product,
-                SellingPrice = product.RegularPrice,
+                SellingPrice = product.DiscountPrice ?? product.RegularPrice,
             };
             order.OrderedItems.Add(orderedItem);
         }
+
+        var subTotal = order.OrderedItems.Select(o => o.SellingPrice).Sum();
+        order.SubTotal = subTotal;
 
         _unitOfWork.Repository<Order>().Add(order);
 

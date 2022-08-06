@@ -10,8 +10,8 @@ public interface IProductService
     Task<IReadOnlyList<ProductResponseDto>> GetAllProductsAsync(ProductSpecParams productParams);
     Task<int>CountProductsAsync(ProductSpecParams productParams);
     Task<ProductResponseDto> GetProductByIdAsync(Guid id);
-    Task CreateProductAsync(ProductCreateReqDto product);
+    Task<ProductResponseDto> CreateProductAsync(ProductCreateReqDto product);
     Task UpdateProductAsync(Guid id, Product product);
     Task DeleteProductAsync(Guid id);
-    Task UploadImages(string productId, IFormFileCollection images, string webRootPath);
+    Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images);
 }

@@ -17,6 +17,7 @@ public class Product : ABaseEntity
     public Guid CreatedById { get; set; }
     public AppUser CreatedBy { get; set; }
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    public ICollection<FileEntity> Images { get; set; } = new List<FileEntity>();
 
     public ICollection<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; } =
         new List<PromotionalEventProductMapping>();

@@ -58,12 +58,13 @@ public class ProductService : IProductService
         return _mapper.Map<ProductResponseDto>(product);
     }
 
-    public async Task CreateProductAsync(ProductCreateReqDto productDto)
+    public async Task<ProductResponseDto> CreateProductAsync(ProductCreateReqDto productDto)
     {
         var product = _mapper.Map<Product>(productDto);
-        // var user = _currentUserService.UserId;
-        product.CreatedById = _currentUserService.UserId;
 
+        _currentUserService.ValidateIfEditor();
+
+        product.CreatedById = _currentUserService.UserId;
 
         product.ProductCategories = new List<ProductCategory>();
         try
@@ -92,6 +93,7 @@ public class ProductService : IProductService
         {
             throw new Exception("Error while creating product");
         }
+        return _mapper.Map<ProductResponseDto>(product);
     }
 
     public Task DeleteProductAsync(Guid id)
@@ -104,8 +106,17 @@ public class ProductService : IProductService
         throw new NotImplementedException();
     }
 
-    public async Task UploadImages(string productId, IFormFileCollection images, string webRootPath)
+    public async Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images)
     {
-        // var fileEntities = await _fileUploadService.UploadFiles("", images);
-    }
+        // Console.WriteLine(webRootPath);
+        var files = await _fileUploadService.UploadFiles("Product", webRootPath, images);
+        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(Guid.Parse(productId));
+        if (product == null) throw new NotFoundException("Product not found");
+        foreach (var image in files)
+        {
+            product.Images.Add(image);
+        }
+        await _unitOfWork.Complete();
+        return _mapper.Map<ProductResponseDto>(product);
+    }   
 }

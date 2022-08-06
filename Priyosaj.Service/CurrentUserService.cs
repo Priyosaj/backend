@@ -9,7 +9,7 @@ public class CurrentUserService : ICurrentUserService
 {
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
     {
-        var claimsPrincipal = httpContextAccessor.HttpContext.User;
+        var claimsPrincipal = httpContextAccessor.HttpContext?.User;
 
         /*
         var userId = claimsPrincipal.FindFirstValue("userId");
@@ -23,17 +23,18 @@ public class CurrentUserService : ICurrentUserService
         }
         */
 
-        UserId = Guid.Parse(claimsPrincipal.FindFirstValue("userId"));
-        UserName = claimsPrincipal.FindFirstValue(ClaimTypes.GivenName);
-        Email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
-        Role = claimsPrincipal.FindFirstValue(ClaimTypes.Role);
+        var userId = claimsPrincipal.FindFirstValue("userId");
+        if (userId != null) UserId = Guid.Parse(userId);
+        UserName = claimsPrincipal?.FindFirstValue(ClaimTypes.GivenName);
+        Email = claimsPrincipal?.FindFirstValue(ClaimTypes.Email);
+        Role = claimsPrincipal?.FindFirstValue(ClaimTypes.Role);
     }
 
-    public string Role { get; set; }
+    public string? Role { get; set; }
 
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
-    public string UserName { get; set; }
+    public string? UserName { get; set; }
 
     public Guid UserId { get; set; }
 

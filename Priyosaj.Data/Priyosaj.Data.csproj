@@ -15,8 +15,4 @@
         <PackageReference Include="StackExchange.Redis" Version="2.2.88" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Migrations" />
-    </ItemGroup>
-
 </Project>

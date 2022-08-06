@@ -12,13 +12,8 @@ using Priyosaj.Data;
 namespace Priyosaj.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-<<<<<<<< HEAD:Priyosaj.Data/Migrations/20220806080415_Initial.Designer.cs
-    [Migration("20220806080415_Initial")]
+    [Migration("20220806093150_Initial")]
     partial class Initial
-========
-    [Migration("20220806083817_InitialMigration")]
-    partial class InitialMigration
->>>>>>>> origin/main:Priyosaj.Data/Migrations/20220806083817_InitialMigration.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

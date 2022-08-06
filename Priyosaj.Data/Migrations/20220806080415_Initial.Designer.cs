@@ -12,7 +12,7 @@ using Priyosaj.Data;
 namespace Priyosaj.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220805155012_Initial")]
+    [Migration("20220806080415_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -584,7 +584,7 @@ namespace Priyosaj.Data.Migrations
 
             modelBuilder.Entity("Priyosaj.Core.Entities.OrderEntities.Order", b =>
                 {
-                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "AppUser")
+                    b.HasOne("Priyosaj.Core.Entities.IdentityEntities.AppUser", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -633,7 +633,7 @@ namespace Priyosaj.Data.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Customer");
 
                     b.Navigation("DeliveryMethod");
 

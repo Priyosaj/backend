@@ -25,10 +25,12 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
             _logger.LogError(ex, ex.Message);
+            
             context.Response.ContentType = "application/json";
+            
             var statusCode = ex is ABaseException e ? e.StatusCode : 500;
+            context.Response.StatusCode = statusCode;
 
             var response = _env.IsDevelopment()
                 ? new ApiErrorResponse(statusCode, ex.Message,
@@ -36,7 +38,6 @@ public class ExceptionMiddleware
                 : new ApiErrorResponse(statusCode);
 
             var json = JsonSerializer.Serialize(response);
-
             await context.Response.WriteAsync(json);
         }
     }

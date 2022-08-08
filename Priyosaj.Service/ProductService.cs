@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Priyosaj.Core.DTOs.ProductDTOs;
+using Priyosaj.Core.Entities;
 using Priyosaj.Core.Entities.IdentityEntities;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
@@ -113,15 +114,27 @@ public class ProductService : IProductService
     public async Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images)
     {
         _currentUserService.ValidateIfEditor();
-        // Console.WriteLine(webRootPath);
         var files = await _fileUploadService.UploadFiles("Product", webRootPath, images);
-        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(Guid.Parse(productId));
-        if (product == null) throw new NotFoundException("Product not found");
-        foreach (var image in files)
+        try
         {
-            product.Images.Add(image);
+            // Console.WriteLine(webRootPath);
+            var product = await _unitOfWork.Repository<Product>().GetByIdAsync(Guid.Parse(productId));
+            if (product == null) throw new NotFoundException("Product not found");
+            foreach (var image in files)
+            {
+                product.Images.Add(image);
+            }
+            await _unitOfWork.Complete();
+            return _mapper.Map<ProductResponseDto>(product);
         }
-        await _unitOfWork.Complete();
-        return _mapper.Map<ProductResponseDto>(product);
-    }   
+        catch (Exception e)
+        {
+            foreach (var file in files)
+            {
+                File.Delete(Path.Combine(webRootPath, file.Url));
+                _unitOfWork.Repository<FileEntity>().Delete(file);
+            }
+            throw e;
+        }
+    }
 }

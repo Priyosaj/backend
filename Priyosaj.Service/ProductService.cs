@@ -106,9 +106,66 @@ public class ProductService : IProductService
         await _unitOfWork.Complete();
     }
 
-    public Task UpdateProductAsync(Guid id, Product product)
+    public async Task<ProductResponseDto> UpdateProductAsync(ProductUpdateReqDto product, string rootPath)
     {
-        throw new NotImplementedException();
+        _currentUserService.ValidateIfEditor();
+        var spec = new ProductByIdSpecification(product.Id);
+
+        var productToUpdate = await _unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
+
+        if (product == null) throw new NotFoundException("Product not found");
+        productToUpdate.Title = product.Title;
+        productToUpdate.Description = product.Description;
+        productToUpdate.RegularPrice = product.RegularPrice;
+        productToUpdate.DiscountPrice = product.DiscountPrice;
+
+        if (product.DisplayImage != null)
+        {
+            productToUpdate.DisplayImageId = product.DisplayImage.Id;
+            var displayImageFile = productToUpdate.Images.FirstOrDefault(img => img.Id == product.DisplayImage.Id);
+            if (displayImageFile is null)
+            {
+                throw new NotFoundException("Display Image not found");
+            }
+        }
+
+        var imagesToDelete = productToUpdate.Images.Where(img => !product.Images.Any(imgDto => imgDto.Id == img.Id)).ToList();
+
+        var categories = new List<ProductCategory>();
+        foreach (var category in productToUpdate.ProductCategories)
+        {
+            if (!product.ProductCategories.Contains(category.Id))
+            {
+                categories.Add(category);
+            }
+        }
+        foreach (var category in categories)
+        {
+            productToUpdate.ProductCategories.Remove(category);
+        }
+        foreach (var id in product.ProductCategories)
+        {
+            var category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
+            if (category == null) throw new NotFoundException("Product Category not found");
+            if (productToUpdate.ProductCategories.Any(pc => pc.Id == category.Id))
+            {
+                continue;
+            }
+            productToUpdate.ProductCategories.Add(category);
+            while (category.ParentId != null)
+            {
+                category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync((Guid)category.ParentId);
+                productToUpdate.ProductCategories.Add(category);
+            }
+        }
+
+        await _fileUploadService.DeleteFiles(rootPath, imagesToDelete);
+
+        _unitOfWork.Repository<Product>().Update(productToUpdate);
+
+        var result = await _unitOfWork.Complete();
+
+        return _mapper.Map<ProductResponseDto>(productToUpdate);
     }
 
     public async Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images)
@@ -134,6 +191,7 @@ public class ProductService : IProductService
                 File.Delete(Path.Combine(webRootPath, file.Url));
                 _unitOfWork.Repository<FileEntity>().Delete(file);
             }
+            await _unitOfWork.Complete();
             throw e;
         }
     }

@@ -7,4 +7,5 @@ public interface IFileUploadService
 {
     // Task<List<string>> UploadFiles(string path, IFormFileCollection files);
     Task<List<FileEntity>> UploadFiles(string keyPrefix, string rootPath, IFormFileCollection files);
+    Task DeleteFiles(string rootPath, List<FileEntity> files);
 }

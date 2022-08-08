@@ -78,4 +78,14 @@ public class FileUploadService : IFileUploadService
         }
     }
 
+    public async Task DeleteFiles(string rootPath, List<FileEntity> files)
+    {
+        foreach (var file in files)
+        {
+            File.Delete(Path.Combine(rootPath, file.Url));
+            _unitOfWork.Repository<FileEntity>().Delete(file);
+        }
+        await _unitOfWork.Complete();
+    }
+
 }

@@ -26,6 +26,7 @@ public class ProductFetchSpecification : ABaseSpecification<Product>
     )
     {
         AddInclude(x => x.Include(p => p.ProductCategories));
+        AddInclude(x => x.Include(p => p.Images));
         // AddInclude(x => x.Include(p => p.Creator));
 
         ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);

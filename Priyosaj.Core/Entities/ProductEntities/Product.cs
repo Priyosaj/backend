@@ -16,6 +16,7 @@ public class Product : ABaseEntity
     public int StockCount { get; set; }
     public Guid CreatedById { get; set; }
     public AppUser CreatedBy { get; set; }
+    public Guid? DisplayImageId { get; set; } = null;
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
     public ICollection<FileEntity> Images { get; set; } = new List<FileEntity>();
 

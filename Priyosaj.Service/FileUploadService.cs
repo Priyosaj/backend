@@ -39,11 +39,6 @@ public class FileUploadService : IFileUploadService
     public async Task<List<FileEntity>> UploadFiles(string keyPrefix, string rootPath, IFormFileCollection files)
     {
         List<FileEntity> fileEntities = new List<FileEntity>();
-        Console.WriteLine(rootPath);
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
         var dirToFiles = Path.Combine(rootPath, keyPrefix);
         if (!Directory.Exists(dirToFiles))
         {

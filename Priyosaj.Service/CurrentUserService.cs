@@ -11,18 +11,6 @@ public class CurrentUserService : ICurrentUserService
     {
         var claimsPrincipal = httpContextAccessor.HttpContext?.User;
 
-        /*
-        var userId = claimsPrincipal.FindFirstValue("userId");
-        var userName = claimsPrincipal.FindFirstValue(ClaimTypes.GivenName);
-        var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
-        var role = claimsPrincipal.FindFirstValue(ClaimTypes.Role);
-
-        if (userId == null || userName == null || email == null || role == null)
-        {
-            throw new UnauthorizedAccessException("Please log in");
-        }
-        */
-
         var userId = claimsPrincipal.FindFirstValue("userId");
         if (userId != null) UserId = Guid.Parse(userId);
         UserName = claimsPrincipal?.FindFirstValue(ClaimTypes.GivenName);
@@ -40,8 +28,9 @@ public class CurrentUserService : ICurrentUserService
 
     public void ValidateIfEditor()
     {
+        ValidateIfAuth();
         var allowedRoles = new List<string>() { UserRolesConstants.Admin, UserRolesConstants.Editor };
-        if (!allowedRoles.Contains(Role))
+        if (Role == null || !allowedRoles.Contains(Role))
         {
             throw new UnauthorizedAccessException();
         }
@@ -49,8 +38,17 @@ public class CurrentUserService : ICurrentUserService
 
     public void ValidateIfCustomer()
     {
+        ValidateIfAuth();
         var allowedRoles = new List<string>() { UserRolesConstants.Customer };
-        if (!allowedRoles.Contains(Role))
+        if (Role == null || !allowedRoles.Contains(Role))
+        {
+            throw new UnauthorizedAccessException();
+        }
+    }
+
+    private void ValidateIfAuth()
+    {
+        if (UserId == Guid.Empty || UserName == null || Email == null || Role == null)
         {
             throw new UnauthorizedAccessException();
         }

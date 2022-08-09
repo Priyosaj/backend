@@ -10,7 +10,7 @@ public interface IProductService
     Task<int>CountProductsAsync(ProductSpecParams productParams);
     Task<ProductResponseDto> GetProductByIdAsync(Guid id);
     Task<ProductResponseDto> CreateProductAsync(ProductCreateReqDto product);
-    Task<ProductResponseDto> UpdateProductAsync(ProductUpdateReqDto product, string rootPath);
+    Task<ProductResponseDto> UpdateProductAsync(ProductUpdateReqDto productUpdateReq, string rootPath);
     Task DeleteProductAsync(Guid id);
-    Task<ProductResponseDto> UploadImages(string productId, string webRootPath, IFormFileCollection images);
+    Task<ProductResponseDto> UploadImages(Guid productId, string webRootPath, IFormFileCollection images);
 }

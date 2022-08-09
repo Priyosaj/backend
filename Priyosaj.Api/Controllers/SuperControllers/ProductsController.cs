@@ -43,7 +43,7 @@ public class ProductsController : BaseEditorSuperController
         return StatusCode(201, new ApiDataResponse<ProductResponseDto>(createdProduct, 201, "Product Creation Successful!"));
     }
 
-    [HttpPatch("{productId}")] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> UploadImages([FromRoute]string productId)
+    [HttpPatch("{productId}")] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> UploadImages([FromRoute]Guid productId)
     {
         var product = await _productService.UploadImages(productId, _env.WebRootPath, Request.Form.Files);
         return StatusCode(201, new ApiDataResponse<ProductResponseDto>(product, 201, "Image Upload Successful!"));

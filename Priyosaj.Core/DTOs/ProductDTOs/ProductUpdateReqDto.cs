@@ -8,9 +8,11 @@ public class ProductUpdateReqDto
     [Required] public string Description { get; set; } = string.Empty;
     [Required] public decimal RegularPrice { get; set; }
     [Required] public decimal? DiscountPrice { get; set; }
-    public ImageDto? DisplayImage { get; set; } = null;
-    [Required] public ICollection<ImageDto> Images { get; set; }
+    public ImageDto? DisplayImageToUpdate { get; set; } = null;
+    // [Required] public ICollection<ImageDto> Images { get; set; } = null!;
+
+    public ICollection<Guid>? ImagesToDelete { get; set; }
 
     // Guid to avoid object cycle
-    [Required] public ICollection<Guid> ProductCategories { get; set; }
+    [Required] public ICollection<Guid> ProductCategories { get; set; } = null!;
 }

@@ -11,8 +11,9 @@ public class ProductUpdateReqDto
     public ImageDto? DisplayImageToUpdate { get; set; } = null;
     // [Required] public ICollection<ImageDto> Images { get; set; } = null!;
 
-    public ICollection<Guid>? ImagesToDelete { get; set; }
+    public ICollection<Guid>? ImagesToDelete { get; set; } = null;
+    
 
     // Guid to avoid object cycle
-    [Required] public ICollection<Guid> ProductCategories { get; set; } = null!;
+    [Required] public ICollection<Guid>? NewProductCategories { get; set; } = null;
 }

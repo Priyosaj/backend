@@ -7,10 +7,11 @@ namespace Priyosaj.Core.Entities.ProductEntities;
 [Index(nameof(Title), IsUnique = true)]
 public class ProductCategory : ABaseEntity
 {
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
     public Guid? ParentId { get; set; }
     [JsonIgnore]
     [ForeignKey("ParentId")] public virtual ProductCategory? Parent { get; set; }
-    public virtual ICollection<ProductCategory>? SubCategories { get; set; }
-    public virtual ICollection<Product>? Products { get; set; }
+
+    public ICollection<ProductCategory>? SubCategories { get; set; } = null;
+    public ICollection<Product>? Products { get; set; }
 }

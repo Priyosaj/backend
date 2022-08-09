@@ -1,9 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities;
-using Priyosaj.Core.Entities.IdentityEntities;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
@@ -20,7 +18,8 @@ public class ProductService : IProductService
     private readonly IFileUploadService _fileUploadService;
     private readonly ICurrentUserService _currentUserService;
 
-    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService, ICurrentUserService currentUserService, UserManager<AppUser> userManager)
+    public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService,
+        ICurrentUserService currentUserService)
     {
         _currentUserService = currentUserService;
         _unitOfWork = unitOfWork;
@@ -67,33 +66,15 @@ public class ProductService : IProductService
 
         product.CreatedById = _currentUserService.UserId;
 
-        product.ProductCategories = new List<ProductCategory>();
-        try
-        {
-            foreach (var id in productDto.ProductCategoriesId)
-            {
-                var category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
-                product.ProductCategories.Add(category);
-
-                while (category.ParentId != null)
-                {
-                    category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync((Guid)category.ParentId);
-                    product.ProductCategories.Add(category);
-                }
-            }
-
-            _unitOfWork.Repository<Product>().Add(product);
-        }
-        catch (System.NullReferenceException e)
-        {
-            throw new Exception("Product Category not found");
-        }
+        await AddProductCategories(productDto.ProductCategoriesId, product);
+        _unitOfWork.Repository<Product>().Add(product);
 
         var result = await _unitOfWork.Complete();
         if (result <= 0)
         {
             throw new Exception("Error while creating product");
         }
+
         return _mapper.Map<ProductResponseDto>(product);
     }
 
@@ -109,7 +90,7 @@ public class ProductService : IProductService
     public async Task<ProductResponseDto> UpdateProductAsync(ProductUpdateReqDto productUpdateReq, string rootPath)
     {
         _currentUserService.ValidateIfEditor();
-        
+
         var spec = new ProductByIdSpecification(productUpdateReq.Id);
         var product = await _unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
         if (product == null) throw new NotFoundException("Product not found");
@@ -118,8 +99,8 @@ public class ProductService : IProductService
 
         await HandleProductImagesUpdate(productUpdateReq, updatedProduct, rootPath);
         HandleDisplayImageUpdate(productUpdateReq, updatedProduct);
-        await HandleProductCategoryUpdate(productUpdateReq, updatedProduct);
-        
+        await AddProductCategories(productUpdateReq.NewProductCategories, updatedProduct);
+
         _unitOfWork.Repository<Product>().Update(updatedProduct);
 
         var result = await _unitOfWork.Complete();
@@ -130,67 +111,68 @@ public class ProductService : IProductService
 
         return _mapper.Map<ProductResponseDto>(updatedProduct);
     }
-
-    private async Task HandleProductCategoryUpdate(ProductUpdateReqDto productUpdateReq, Product updatedProduct)
+    
+    private async Task AddProductCategories(ICollection<Guid>? productCategoriesToAdd, Product updatedProduct)
     {
-        var categories = new List<ProductCategory>();
-        foreach (var category in updatedProduct.ProductCategories)
-        {
-            if (!productUpdateReq.ProductCategories.Contains(category.Id))
-            {
-                categories.Add(category);
-            }
-        }
-
-        foreach (var category in categories)
-        {
-            updatedProduct.ProductCategories.Remove(category);
-        }
-
-        foreach (var id in productUpdateReq.ProductCategories)
+        if (productCategoriesToAdd == null) return;
+        var newCategoriesToAdd = new List<ProductCategory>();
+        foreach (var id in productCategoriesToAdd)
         {
             var category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(id);
             if (category == null) throw new NotFoundException("Product Category not found");
-            if (updatedProduct.ProductCategories.Any(pc => pc.Id == category.Id))
+            if (category.SubCategories != null && category.SubCategories.Count > 0)
             {
-                continue;
+                throw new BadRequestException("Not a leaf node category");
             }
 
-            updatedProduct.ProductCategories.Add(category);
+            newCategoriesToAdd.Add(category);
             while (category.ParentId != null)
             {
-                category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync((Guid)category.ParentId);
-                updatedProduct.ProductCategories.Add(category);
+                category = await _unitOfWork.Repository<ProductCategory>().GetByIdAsync(category.ParentId.Value);
+                if (category == null)
+                {
+                    throw new NotFoundException("Parent Category Not Found");
+                }
+
+                newCategoriesToAdd.Add(category);
             }
         }
+
+        updatedProduct.ProductCategories = newCategoriesToAdd;
     }
 
-    private async Task HandleProductImagesUpdate(ProductUpdateReqDto productUpdateReq, Product updatedProduct, string rootPath)
+    private async Task HandleProductImagesUpdate(ProductUpdateReqDto productUpdateReq, Product updatedProduct,
+        string rootPath)
     {
         if (productUpdateReq.ImagesToDelete == null)
         {
             return;
         }
 
-        if (updatedProduct.DisplayImageId != null && productUpdateReq.ImagesToDelete.Contains(updatedProduct.DisplayImageId.Value))
+        if (updatedProduct.DisplayImageId != null &&
+            productUpdateReq.ImagesToDelete.Contains(updatedProduct.DisplayImageId.Value))
         {
-            throw new BadRequestException("You cannot delete the display image of a product. Please select another image as your display image!");
+            throw new BadRequestException(
+                "You cannot delete the display image of a product. Please select another image as your display image!");
         }
-        
-        var imagesToDelete = updatedProduct.Images.Where(img => productUpdateReq.ImagesToDelete.Contains(img.Id)).ToList();
+
+        var imagesToDelete = updatedProduct.Images.Where(img => productUpdateReq.ImagesToDelete.Contains(img.Id))
+            .ToList();
         await _fileUploadService.DeleteFiles(rootPath, imagesToDelete);
-        updatedProduct.Images = updatedProduct.Images.Where(i => !productUpdateReq.ImagesToDelete.Contains(i.Id)).ToList();
+        updatedProduct.Images =
+            updatedProduct.Images.Where(i => !productUpdateReq.ImagesToDelete.Contains(i.Id)).ToList();
     }
 
     private void HandleDisplayImageUpdate(ProductUpdateReqDto productUpdateReq, Product product)
     {
         if (productUpdateReq.DisplayImageToUpdate == null) return;
-        
+
         var displayImageFile = product.Images.FirstOrDefault(img => img.Id == productUpdateReq.DisplayImageToUpdate.Id);
         if (displayImageFile is null)
         {
             throw new NotFoundException("Display Image not found");
         }
+
         product.DisplayImageId = productUpdateReq.DisplayImageToUpdate.Id;
     }
 
@@ -206,6 +188,7 @@ public class ProductService : IProductService
             {
                 product.Images.Add(image);
             }
+
             await _unitOfWork.Complete();
             return _mapper.Map<ProductResponseDto>(product);
         }
@@ -216,6 +199,7 @@ public class ProductService : IProductService
                 File.Delete(Path.Combine(webRootPath, file.Url));
                 _unitOfWork.Repository<FileEntity>().Delete(file);
             }
+
             await _unitOfWork.Complete();
             throw e;
         }

@@ -1,4 +1,8 @@
+// using System.Text.Json;
 using AutoMapper;
+using Newtonsoft.Json;
+// using Newtonsoft.Json;
+// using Newtonsoft.Json.Linq;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
 using Priyosaj.Core.Entities;
 using Priyosaj.Core.Entities.ProductEntities;
@@ -17,19 +21,29 @@ public class ProductResponseDto : IMapFrom<Product>
     public int? StockCount { get; set; }
     public ImageDto? DisplayImage { get; set; } = null;
     public ICollection<ImageDto> Images { get; set; }
+    public ICollection<Specification> Specifications { get; set; } = new List<Specification>();
     public ICollection<ProductCategoryResponseDto> ProductCategories { get; set; } = null!;
 
     public void Mapping(Profile profile)
     {
         profile.CreateMap<Product, ProductResponseDto>()
             .ForMember(
-                dest => dest.DisplayImage, 
+                dest => dest.DisplayImage,
                 opt => opt.MapFrom(
                     src => src.Images.FirstOrDefault(x => x.Id == src.DisplayImageId)))
             .ForMember(
-                dest => dest.Images, 
-                opt=>opt.MapFrom(
-                    src=>src.Images))
+                dest => dest.Images,
+                opt => opt.MapFrom(
+                    src => src.Images))
+            .ForMember(
+                dest => dest.Specifications,
+                opt => opt.MapFrom(
+                    src =>
+                    {
+                        // var tmp = JsonSerializer.Deserialize<List<Specification>>(src.Specifications);
+                        var tmp = JsonConvert.DeserializeObject<ICollection<Specification>>(src.Specifications);
+                        return tmp;
+                    }))
             .ReverseMap();
     }
 }

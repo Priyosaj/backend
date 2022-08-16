@@ -8,6 +8,7 @@ public class Product : ABaseEntity
 {
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public string Specifications { get; set; } = "[]";
     public decimal RegularPrice { get; set; }
     public decimal? DiscountPrice { get; set; }
     public int StockCount { get; set; }
@@ -19,4 +20,10 @@ public class Product : ABaseEntity
 
     public ICollection<PromotionalEventProductMapping> PromotionalEventProductMappings { get; set; } =
         new List<PromotionalEventProductMapping>();
+}
+
+public class Specification
+{
+    public string Title { get; set; } = string.Empty;
+    public string Value { get; set; } = string.Empty;
 }

@@ -1,5 +1,8 @@
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+// using Newtonsoft.Json;
+
 using Priyosaj.Core.DTOs.ProductDTOs;
 using Priyosaj.Core.Entities;
 using Priyosaj.Core.Entities.ProductEntities;
@@ -60,6 +63,7 @@ public class ProductService : IProductService
 
     public async Task<ProductResponseDto> CreateProductAsync(ProductCreateReqDto productDto)
     {
+
         var product = _mapper.Map<Product>(productDto);
 
         _currentUserService.ValidateIfEditor();
@@ -74,7 +78,18 @@ public class ProductService : IProductService
         {
             throw new Exception("Error while creating product");
         }
-
+        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");
+        // Console.WriteLine(product.Specification);
+        // var tmp = JsonSerializer.Deserialize<ICollection<Object>>(product.Specification);
+        foreach (var obj in tmp)
+        {
+            Console.WriteLine(obj);
+        }
         return _mapper.Map<ProductResponseDto>(product);
     }
 

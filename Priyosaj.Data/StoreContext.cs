@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Priyosaj.Core.Entities;
 using Priyosaj.Core.Entities.IdentityEntities;
 using Priyosaj.Core.Entities.OrderEntities;
 using Priyosaj.Core.Entities.ProductEntities;
@@ -42,6 +43,7 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, Guid,
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<ProductCategory> ProductCategories { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<FileEntity> FileEntities { get; set; } = null!;
     public DbSet<OrderedItem> OrderedItems { get; set; } = null!;
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; } = null!;
     public DbSet<PromotionalEvent> PromotionalEvents { get; set; } = null!;

@@ -12,37 +12,54 @@ public class ProductsController : BaseEditorSuperController
     private IProductService _productService;
     private readonly IWebHostEnvironment _env;
 
-    public ProductsController(ILogger<ProductsController> logger, IProductService productService, IWebHostEnvironment env)
+    public ProductsController(IWebHostEnvironment env, ILogger<ProductsController> logger, IProductService productService)
     {
         _logger = logger;
         _productService = productService;
         _env = env;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProductResponseDto>>> GetProductsAsync([FromBody] ProductSpecParams productParams)
+    [HttpGet] public async Task<ActionResult<ApiPaginatedResponse<ProductResponseDto>>> GetProductsAsync([FromQuery] ProductSpecParams productParams)
     {
-        var products = await _productService.GetAllProductsAsync(productParams);
-        return Ok(products);
+        var totalItems = await _productService.CountProductsAsync(productParams);
+
+        var data = await _productService.GetAllProductsAsync(productParams);
+
+        return StatusCode(200, new ApiPaginatedResponse<ProductResponseDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
     }
 
-    [HttpPost]
-    public async Task<ActionResult> CreateProductAsync(ProductCreateReqDto product)
+    [HttpGet("{id}")] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> GetProductAsync(Guid id)
     {
-        await _productService.CreateProductAsync(product);
-        return StatusCode(204, new ApiResponse(201, "Product Creation Successful!"));
+        _logger.LogInformation("Returning Product: " + id);
+
+        var product = await _productService.GetProductByIdAsync(id);
+
+        return StatusCode(200, new ApiDataResponse<ProductResponseDto>(product, 200, "Successful!"));
     }
 
-    
-
-    [HttpPatch("{productId}")]
-    public async Task<ActionResult> UploadImages([FromQuery] string productId, [FromBody] IFormFileCollection images)
+    [HttpPost] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> CreateProductAsync(ProductCreateReqDto product)
     {
-        await _productService.UploadImages(productId, images, _env.WebRootPath);
-        return StatusCode(204, new ApiResponse(204, "Image Upload Successful!"));
+        var createdProduct = await _productService.CreateProductAsync(product);
+        return StatusCode(201, new ApiDataResponse<ProductResponseDto>(createdProduct, 201, "Product Creation Successful!"));
     }
 
+    [HttpPatch("{productId}")] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> UploadImages([FromRoute]Guid productId)
+    {
+        var product = await _productService.UploadImages(productId, _env.WebRootPath, Request.Form.Files);
+        return StatusCode(201, new ApiDataResponse<ProductResponseDto>(product, 201, "Image Upload Successful!"));
+    }
 
-    /*Product Update, Delete*/
+    [HttpDelete("{productId}")] public async Task<ActionResult<ApiResponse>> DeleteProductAsync([FromRoute]Guid productId)
+    {
+        await _productService.DeleteProductAsync(productId);
+        return StatusCode(201, new ApiResponse(204, "Product Deletion Successful!"));
+    }
+
+    /*Product Update*/
+    [HttpPatch] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> UpdateProductAsync([FromBody]ProductUpdateReqDto product)
+    {
+        var updatedProduct = await _productService.UpdateProductAsync(product, _env.WebRootPath);
+        return StatusCode(201, new ApiDataResponse<ProductResponseDto>(updatedProduct, 201, "Product Update Successful!"));
+    }
     
 }

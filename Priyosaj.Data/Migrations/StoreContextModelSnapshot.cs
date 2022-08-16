@@ -22,6 +22,21 @@ namespace Priyosaj.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("FileEntityProduct", b =>
+                {
+                    b.Property<Guid>("ImagesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ImagesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("FileEntityProduct");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -108,6 +123,37 @@ namespace Priyosaj.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Priyosaj.Core.Entities.FileEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileEntities");
                 });
 
             modelBuilder.Entity("Priyosaj.Core.Entities.IdentityEntities.Address", b =>
@@ -400,11 +446,18 @@ namespace Priyosaj.Data.Migrations
                     b.Property<decimal?>("DiscountPrice")
                         .HasColumnType("numeric");
 
+                    b.Property<Guid?>("DisplayImageId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("RegularPrice")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("Specifications")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("StockCount")
                         .HasColumnType("integer");
@@ -517,6 +570,21 @@ namespace Priyosaj.Data.Migrations
                     b.HasIndex("ProductsId");
 
                     b.ToTable("ProductProductCategory");
+                });
+
+            modelBuilder.Entity("FileEntityProduct", b =>
+                {
+                    b.HasOne("Priyosaj.Core.Entities.FileEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Priyosaj.Core.Entities.ProductEntities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

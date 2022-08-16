@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using AutoMapper;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.MapperProfile;
@@ -14,6 +15,7 @@ public class ProductCreateReqDto : IMapFrom<Product>
     [Required] public Decimal Price { get; set; }
 
     public ICollection<Guid> ProductCategoriesId { get; set; } = new List<Guid>();
+    public ICollection<Specification> Specifications { get; set; } = new List<Specification>();
 
     public void Mapping(Profile profile)
     {
@@ -23,6 +25,14 @@ public class ProductCreateReqDto : IMapFrom<Product>
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
             .ForMember(dest => dest.ModifiedAt, opt => opt.Ignore())
             .ForMember(dest => dest.RegularPrice, opt => opt.MapFrom(src => src.Price))
+            // .ForMember(dest => dest.Specification, opt => opt.MapFrom(src => src.Specification))
+            .ForMember(dest => dest.Specifications, opt => opt.MapFrom(
+                src => JsonSerializer.Serialize(
+                    src.Specifications,
+                    new JsonSerializerOptions
+                    {
+                        WriteIndented = true
+                    })))
             .ReverseMap();
     }
 }

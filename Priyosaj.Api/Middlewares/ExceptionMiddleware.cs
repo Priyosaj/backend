@@ -31,7 +31,6 @@ public class ExceptionMiddleware
             
             var statusCode = ex is ABaseException e ? e.StatusCode : 500;
             context.Response.StatusCode = statusCode;
-
             var response = _env.IsDevelopment()
                 ? new ApiErrorResponse(statusCode, ex.Message,
                     ex.StackTrace?.ToString())

@@ -111,7 +111,7 @@ public class ProductService : IProductService
             throw new BadRequestException("Product Update Failed!");
         }
 
-        //
+        // Delete images from server if database transaction is successful
         if (imagesToDelete != null)
         {
             await _fileUploadService.DeleteFiles(rootPath, imagesToDelete);

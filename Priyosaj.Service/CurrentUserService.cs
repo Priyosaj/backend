@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Priyosaj.Core.Constants;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Utils;
 
 namespace Priyosaj.Service;
 
@@ -32,7 +33,7 @@ public class CurrentUserService : ICurrentUserService
         var allowedRoles = new List<string>() { UserRolesConstants.Admin, UserRolesConstants.Editor };
         if (Role == null || !allowedRoles.Contains(Role))
         {
-            throw new UnauthorizedAccessException();
+            throw new UnAuthorizedException();
         }
     }
 
@@ -42,7 +43,7 @@ public class CurrentUserService : ICurrentUserService
         var allowedRoles = new List<string>() { UserRolesConstants.Customer };
         if (Role == null || !allowedRoles.Contains(Role))
         {
-            throw new UnauthorizedAccessException();
+            throw new UnAuthorizedException();
         }
     }
 
@@ -50,7 +51,7 @@ public class CurrentUserService : ICurrentUserService
     {
         if (UserId == Guid.Empty || UserName == null || Email == null || Role == null)
         {
-            throw new UnauthorizedAccessException();
+            throw new UnAuthorizedException();
         }
     }
 }

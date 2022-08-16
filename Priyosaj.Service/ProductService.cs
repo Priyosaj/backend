@@ -78,18 +78,18 @@ public class ProductService : IProductService
         {
             throw new Exception("Error while creating product");
         }
-        Console.WriteLine("-------------------");
-        Console.WriteLine("-------------------");
-        Console.WriteLine("-------------------");
-        Console.WriteLine("-------------------");
-        Console.WriteLine("-------------------");
-        Console.WriteLine("-------------------");
-        // Console.WriteLine(product.Specification);
-        // var tmp = JsonSerializer.Deserialize<ICollection<Object>>(product.Specification);
-        foreach (var obj in tmp)
-        {
-            Console.WriteLine(obj);
-        }
+        // Console.WriteLine("-------------------");
+        // Console.WriteLine("-------------------");
+        // Console.WriteLine("-------------------");
+        // Console.WriteLine("-------------------");
+        // Console.WriteLine("-------------------");
+        // Console.WriteLine("-------------------");
+        // // Console.WriteLine(product.Specification);
+        // // var tmp = JsonSerializer.Deserialize<ICollection<Object>>(product.Specification);
+        // foreach (var obj in tmp)
+        // {
+        //     Console.WriteLine(obj);
+        // }
         return _mapper.Map<ProductResponseDto>(product);
     }
 

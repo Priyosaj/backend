@@ -455,7 +455,7 @@ namespace Priyosaj.Data.Migrations
                     b.Property<decimal>("RegularPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("Specification")
+                    b.Property<string>("Specifications")
                         .IsRequired()
                         .HasColumnType("text");
 

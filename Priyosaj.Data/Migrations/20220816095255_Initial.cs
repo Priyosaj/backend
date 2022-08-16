@@ -68,6 +68,23 @@ namespace Priyosaj.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FileEntities",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FileEntities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
                 {
@@ -245,10 +262,12 @@ namespace Priyosaj.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
+                    Specifications = table.Column<string>(type: "text", nullable: false),
                     RegularPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     DiscountPrice = table.Column<decimal>(type: "numeric", nullable: true),
                     StockCount = table.Column<int>(type: "integer", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayImageId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
@@ -296,6 +315,30 @@ namespace Priyosaj.Data.Migrations
                         name: "FK_Orders_DeliveryMethods_DeliveryMethodId",
                         column: x => x.DeliveryMethodId,
                         principalTable: "DeliveryMethods",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FileEntityProduct",
+                columns: table => new
+                {
+                    ImagesId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductsId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FileEntityProduct", x => new { x.ImagesId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_FileEntityProduct_FileEntities_ImagesId",
+                        column: x => x.ImagesId,
+                        principalTable: "FileEntities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FileEntityProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -424,6 +467,11 @@ namespace Priyosaj.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_FileEntityProduct_ProductsId",
+                table: "FileEntityProduct",
+                column: "ProductsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderedItems_OrderId",
                 table: "OrderedItems",
                 column: "OrderId");
@@ -491,6 +539,9 @@ namespace Priyosaj.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "FileEntityProduct");
+
+            migrationBuilder.DropTable(
                 name: "OrderedItems");
 
             migrationBuilder.DropTable(
@@ -501,6 +552,9 @@ namespace Priyosaj.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "FileEntities");
 
             migrationBuilder.DropTable(
                 name: "Orders");

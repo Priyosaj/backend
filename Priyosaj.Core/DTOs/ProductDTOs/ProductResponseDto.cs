@@ -1,6 +1,9 @@
 // using System.Text.Json;
+
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Priyosaj.Core.DTOs.OrderDTOs;
 // using Newtonsoft.Json;
 // using Newtonsoft.Json.Linq;
 using Priyosaj.Core.DTOs.ProductCategoryDTOs;
@@ -8,6 +11,7 @@ using Priyosaj.Core.Entities;
 using Priyosaj.Core.Entities.ProductEntities;
 // using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.MapperProfile;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Priyosaj.Core.DTOs.ProductDTOs;
 
@@ -35,15 +39,30 @@ public class ProductResponseDto : IMapFrom<Product>
                 dest => dest.Images,
                 opt => opt.MapFrom(
                     src => src.Images))
-            .ForMember(
-                dest => dest.Specifications,
-                opt => opt.MapFrom(
-                    src =>
-                    {
-                        // var tmp = JsonSerializer.Deserialize<List<Specification>>(src.Specifications);
-                        var tmp = JsonConvert.DeserializeObject<ICollection<Specification>>(src.Specifications);
-                        return tmp;
-                    }))
+            .ForMember(dest => dest.Specifications, opt => opt.MapFrom<ProductSpecificationsResolver>())
             .ReverseMap();
+    }
+}
+
+public class ProductSpecificationsResolver : IValueResolver<Product, ProductResponseDto, ICollection<Specification>>
+{
+    private readonly IConfiguration _config;
+
+    public ProductSpecificationsResolver(IConfiguration config)
+    {
+        _config = config;
+    }
+
+    public ICollection<Specification> Resolve(Product source, ProductResponseDto destination,
+        ICollection<Specification> destMember,
+        ResolutionContext context)
+    {
+        var specs = new List<Specification>();
+        if (!string.IsNullOrEmpty(source.Specifications))
+        {
+            specs = JsonSerializer.Deserialize<List<Specification>>(source.Specifications);
+        }
+
+        return specs!;
     }
 }

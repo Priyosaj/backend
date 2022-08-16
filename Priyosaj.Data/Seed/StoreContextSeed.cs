@@ -10,16 +10,16 @@ public class StoreContextSeed
     {
         try
         {
-            // if(!context.ProductCategories.Any())
-            // {
-            //     var categoriesData = File.ReadAllText("../Priyosaj.Data/Seed/SeedData/ProductCategories.json");
-            //     var categories = JsonSerializer.Deserialize<List<ProductCategory>>(categoriesData);
-            //     foreach(var category in categories)
-            //     {
-            //         context.ProductCategories.Add(category);
-            //     }
-            //     await context.SaveChangesAsync();
-            // }
+            if(!context.ProductCategories.Any())
+            {
+                var categoriesData = File.ReadAllText("../Priyosaj.Data/Seed/SeedData/ProductCategories.json");
+                var categories = JsonSerializer.Deserialize<List<ProductCategory>>(categoriesData);
+                foreach(var category in categories)
+                {
+                    context.ProductCategories.Add(category);
+                }
+                await context.SaveChangesAsync();
+            }
         }
         catch (Exception ex)
         {

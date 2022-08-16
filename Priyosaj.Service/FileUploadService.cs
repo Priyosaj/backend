@@ -47,6 +47,13 @@ public class FileUploadService : IFileUploadService
 
         try
         {
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("-------------------");
             foreach (var file in files)
             {
                 var fileName = $"{keyPrefix}_{Guid.NewGuid()}_{file.FileName}";

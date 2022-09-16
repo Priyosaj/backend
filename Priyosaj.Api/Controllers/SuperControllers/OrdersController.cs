@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Priyosaj.Core.DTOs.OrderDTOs;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Models;
+using Priyosaj.Core.Params;
 
 namespace Priyosaj.Api.Controllers.SuperControllers;
 
@@ -17,13 +19,19 @@ public class OrdersController : BaseEditorSuperController
         _env = env;
     }
 
-    [HttpGet("{customerId}")]
-    public async Task<ActionResult<OrderToReturnDto>> GetCustomerOrders(Guid customerId)
+    [HttpGet] public async Task<ActionResult<ApiPaginatedResponse<OrderToReturnDto>>> GetAllOrders([FromQuery] OrderFetchSpecificationParams orderParams)
     {
-        throw new NotImplementedException();
-        // var email = User.GetUserEmail();
-        // var order = await _orderService.GetOrderByIdAsync(id, email);
-        // if (order == null) return NotFound(new ApiResponse(404));
-        // return _mapper.Map<OrderToReturnDto>(order);
+        var totalItems = await _orderService.CountOrdersAsync(orderParams);
+
+        var data = await _orderService.GetAllOrdersAsync(orderParams);
+
+        return StatusCode(200, new ApiPaginatedResponse<OrderToReturnDto>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
+    }
+
+    [HttpGet("{orderId}")]
+    public async Task<ActionResult<ApiDataResponse<OrderToReturnDto>>> GetOrder(Guid orderId)
+    {
+        var order = await _orderService.GetOrderByIdAsync(orderId);
+        return StatusCode(200, new ApiDataResponse<OrderToReturnDto>(order, 200, "Order Successfully Fetched!"));
     }
 }

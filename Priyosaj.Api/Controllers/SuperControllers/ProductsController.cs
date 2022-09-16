@@ -43,6 +43,7 @@ public class ProductsController : BaseEditorSuperController
     [HttpPost] public async Task<ActionResult<ApiDataResponse<ProductResponseDto>>> CreateProductAsync(ProductCreateReqDto product)
     {
         var createdProduct = await _productService.CreateProductAsync(product);
+        
         return StatusCode(201, new ApiDataResponse<ProductResponseDto>(createdProduct, 201, "Product Creation Successful!"));
     }
 

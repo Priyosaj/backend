@@ -4,6 +4,7 @@ using Priyosaj.Core.Entities.OrderEntities;
 using Priyosaj.Core.Entities.ProductEntities;
 using Priyosaj.Core.Interfaces.Repositories;
 using Priyosaj.Core.Interfaces.Services;
+using Priyosaj.Core.Params;
 using Priyosaj.Core.Utils;
 using Priyosaj.Data.Specifications.OrderSpecifications;
 
@@ -27,11 +28,13 @@ public class OrderService : IOrderService
 
     #region AdminSection
 
-    // Todo: Add Pagination
-    public async Task<IReadOnlyList<OrderToReturnDto>> GetAllOrders()
+    public async Task<IReadOnlyList<OrderToReturnDto>> GetAllOrdersAsync(OrderFetchSpecificationParams orderParams)
     {
         _currentUserService.ValidateIfEditor();
-        var orders = await _unitOfWork.Repository<Order>().ListAllAsync();
+
+        var spec = new OrderFetchSpecification(orderParams);
+        
+        var orders = await _unitOfWork.Repository<Order>().ListAllAsyncWithSpec(spec);
 
         if (orders == null)
         {
@@ -39,6 +42,13 @@ public class OrderService : IOrderService
         }
 
         return _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);
+    }
+
+    public async Task<int> CountOrdersAsync(OrderFetchSpecificationParams orderParams)
+    {
+        var spec = new OrderFetchSpecification(orderParams);
+        var count = await _unitOfWork.Repository<Order>().CountAsync(spec);
+        return count;
     }
 
     public async Task<OrderToReturnDto> GetOrderByIdAsync(Guid orderId)
@@ -148,6 +158,5 @@ public class OrderService : IOrderService
     {
         return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
     }
-
     #endregion
 }

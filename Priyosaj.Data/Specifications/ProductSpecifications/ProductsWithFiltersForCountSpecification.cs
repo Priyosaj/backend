@@ -16,7 +16,7 @@ public class ProductsWithFiltersForCountSpecification : ABaseSpecification<Produ
             &&
             (((productParams.Type == TypeCandidate.Active) && x.DeletedAt == null) ||
             (productParams.Type == TypeCandidate.Trash && x.DeletedAt != null) ||
-            (productParams.Type == TypeCandidate.All)))
+            (productParams.Type == TypeCandidate.All && x.DeletedAt != null || x.DeletedAt == null)))
     )
     {
     }

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "orderDate": {},
+    "shipToAddress": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "houseNo": "20/1 Block A",
+      "street": "Doom Street",
+      "city": "Night City",
+      "zipCode": "123456"
+    },
+    "deliveryMethod": "Shipping",
+    "shippingPrice": 20,
+    "orderItems": [
+      {
+        "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "productName": "Razer Huntsman Tournament Edition TKL Tenkeyless Gaming Keyboard",
+        "pictureUrl": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T2/images/I/71GVODjIEJL._AC_SX679_.jpg",
+        "price": 10,
+        "quantity": 1
+      },
+      {
+        "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+        "productName": "Logitech G435 LIGHTSPEED and Bluetooth Wireless Gaming Headset",
+        "pictureUrl": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T2/images/I/81STRBKrXjL._AC_SX466_.jpg",
+        "price": 15,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 25,
+    "status": "Not Delivered"
+  },
+  {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "orderDate": {},
+    "shipToAddress": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "houseNo": "20/1 Block A",
+      "street": "Doom Street",
+      "city": "Death City",
+      "zipCode": "123456"
+    },
+    "deliveryMethod": "Shipping",
+    "shippingPrice": 20,
+    "orderItems": [
+      {
+        "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "productName": "Razer Huntsman Tournament Edition TKL Tenkeyless Gaming Keyboard",
+        "pictureUrl": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T2/images/I/71GVODjIEJL._AC_SX679_.jpg",
+        "price": 10,
+        "quantity": 1
+      },
+      {
+        "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+        "productName": "Logitech G435 LIGHTSPEED and Bluetooth Wireless Gaming Headset",
+        "pictureUrl": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T2/images/I/81STRBKrXjL._AC_SX466_.jpg",
+        "price": 15,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 25,
+    "status": "Not Delivered"
+  }
+]

@@ -13,17 +13,25 @@ public class ProductFetchSpecification : ABaseSpecification<Product>
     }
 
     public ProductFetchSpecification(ProductSpecParams productParams)
-        : base(x => 
-            (string.IsNullOrEmpty(productParams.Search) || 
-            x.Title.ToLower().Contains(productParams.Search))
-            && 
-            (!productParams.CategoryId.HasValue || 
-            x.ProductCategories.Any(x => x.Id == productParams.CategoryId)
-            && 
-            (((productParams.Type == TypeCandidate.Active) && x.DeletedAt == null) || 
-            (productParams.Type == TypeCandidate.Trash && x.DeletedAt != null) || 
-            (productParams.Type == TypeCandidate.All)))
-    )
+        : base(
+            x =>
+                (
+                    string.IsNullOrEmpty(productParams.Search)
+                    || x.Title.ToLower().Contains(productParams.Search)
+                )
+                && (
+                    !productParams.CategoryId.HasValue
+                    || x.ProductCategories.Any(x => x.Id == productParams.CategoryId)
+                )
+                && (
+                    ((productParams.Type == TypeCandidate.Active) && x.DeletedAt == null)
+                    || (productParams.Type == TypeCandidate.Trash && x.DeletedAt != null)
+                    || (
+                        productParams.Type == TypeCandidate.All && x.DeletedAt != null
+                        || x.DeletedAt == null
+                    )
+                )
+        )
     {
         AddInclude(x => x.Include(p => p.ProductCategories));
         AddInclude(x => x.Include(p => p.Images));

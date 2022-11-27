@@ -13,7 +13,7 @@ public class ProductSpecParams
         set => _pageSize = Math.Min(MaxPageSize, PageSize);
     }
 
-    public TypeCandidate Type { get; set; } = TypeCandidate.Active;
+    public TypeCandidate? Type { get; set; } = TypeCandidate.Active;
 
     public Guid? CategoryId { get; set; }
     

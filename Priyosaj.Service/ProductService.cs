@@ -83,7 +83,11 @@ public class ProductService : IProductService
         var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
         if (product == null) throw new NotFoundException("Product not found");
         product.DeletedAt = DateTime.Now;
-        await _unitOfWork.Complete();
+        var result =  await _unitOfWork.Complete();
+        if (result <= 0)
+        {
+            throw new Exception("Error while deleting product");
+        }
     }
 
     public async Task<ProductResponseDto> UpdateProductAsync(ProductUpdateReqDto productUpdateReq, string rootPath)

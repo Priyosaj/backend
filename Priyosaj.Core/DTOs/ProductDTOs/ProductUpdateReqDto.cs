@@ -12,6 +12,7 @@ public class ProductUpdateReqDto : IMapFrom<Product>
     [Required] public string Description { get; set; } = string.Empty;
     [Required] public decimal RegularPrice { get; set; }
     [Required] public decimal? DiscountPrice { get; set; }
+    [Required] public int StockCount { get; set; }
     public ImageDto? DisplayImageToUpdate { get; set; } = null;
     // [Required] public ICollection<ImageDto> Images { get; set; } = null!;
     public ICollection<Specification> Specifications { get; set; } = new List<Specification>();
